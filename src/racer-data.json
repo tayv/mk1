@@ -1,0 +1,98 @@
+[
+    {
+        "id": 1,
+        "avatar": "avatar img",
+        "name": "Racer Name",
+        "points": 0,
+        "change": "-",
+        "trophy": "🏆"
+    },
+    {
+        "id": 2,
+        "avatar": "avatar img",
+        "name": "Racer Name",
+        "points": 0,
+        "change": "-",
+        "trophy": null
+    },
+    {
+        "id": 3,
+        "avatar": "avatar img",
+        "name": "Racer Name",
+        "points": 0,
+        "change": "-",
+        "trophy": null
+    },
+    {
+        "id": 4,
+        "avatar": "avatar img",
+        "name": "Racer Name",
+        "points": 0,
+        "change": "-",
+        "trophy": null
+    },
+    {
+        "id": 5,
+        "avatar": "avatar img",
+        "name": "Racer Name",
+        "points": 0,
+        "change": "-",
+        "trophy": null
+    },
+    {
+        "id": 6,
+        "avatar": "avatar img",
+        "name": "Racer Name",
+        "points": 0,
+        "change": "-",
+        "trophy": null
+    },
+    {
+        "id": 7,
+        "avatar": "avatar img",
+        "name": "Racer Name",
+        "points": 0,
+        "change": "-",
+        "trophy": null
+    },
+    {
+        "id": 8,
+        "avatar": "avatar img",
+        "name": "Racer Name",
+        "points": 0,
+        "change": "-",
+        "trophy": null
+    },
+    {
+        "id": 9,
+        "avatar": "avatar img",
+        "name": "Racer Name",
+        "points": 0,
+        "change": "-",
+        "trophy": null
+    },
+    {
+        "id": 10,
+        "avatar": "avatar img",
+        "name": "Racer Name",
+        "points": 0,
+        "change": "-",
+        "trophy": null
+    },
+    {
+        "id": 11,
+        "avatar": "avatar img",
+        "name": "Racer Name",
+        "points": 0,
+        "change": "-",
+        "trophy": null
+    },
+    {
+        "id": 12,
+        "avatar": "avatar img",
+        "name": "Racer Name",
+        "points": 0,
+        "change": "-",
+        "trophy": null
+    }
+]

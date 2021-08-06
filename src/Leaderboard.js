@@ -1,107 +1,35 @@
-import React from 'react'; 
+import React, { useState } from 'react'; 
+import racerData from './racer-data.json';
 import './Leaderboard.css';
   
 const Leaderboard = () => {
-  return  (
-    <div className="Leaderboard-container">
-        <table>
-            <thead>
-                <tr>
-                    <th></th>
-                    <th colspan="2">Racer</th>
-                    <th>Points</th>
-                    <th>Change</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>🏆</td>
-                    <td>[avatar]</td>
-                    <td>Racer Name</td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>[avatar]</td>
-                    <td>Racer Name</td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>[avatar]</td>
-                    <td>Racer Name</td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>[avatar]</td>
-                    <td>Racer Name</td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>[avatar]</td>
-                    <td>Racer Name</td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>[avatar]</td>
-                    <td>Racer Name</td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>[avatar]</td>
-                    <td>Racer Name</td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>[avatar]</td>
-                    <td>Racer Name</td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>[avatar]</td>
-                    <td>Racer Name</td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>[avatar]</td>
-                    <td>Racer Name</td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>[avatar]</td>
-                    <td>Racer Name</td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>[avatar]</td>
-                    <td>Racer Name</td>
-                    <td>0</td>
-                    <td>-</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-  )
+    const [racers, setRacers] = useState(racerData);
+
+    return  (
+        <div className="Leaderboard-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th colspan="2">Racer</th>
+                        <th>Points</th>
+                        <th>Change</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    { racers.map( (racer) => (
+                        <tr>
+                            <td>{ racer.trophy }</td>
+                            <td>{ racer.avatar }</td>
+                            <td>{ racer.name }</td>
+                            <td>{ racer.points }</td>
+                            <td>{ racer.change }</td>
+                        </tr>
+                    )) }
+                </tbody>
+            </table>
+        </div>
+    )
 }
   
 export default Leaderboard;
