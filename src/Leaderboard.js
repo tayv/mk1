@@ -7,6 +7,15 @@ const Leaderboard = () => {
 
     return  (
         <div className="Leaderboard-container">
+            <div className="Leaderboard-filter"> 
+                <label for="season" style={{visibility: "hidden"}}>Season: </label>
+                <select name="season" id="season">
+                    <option value="s1">Season 1</option>
+                    <option value="s2">Season 2</option>
+                </select> 
+            </div>
+        
+        <div>
             <table>
                 <thead>
                     <tr>
@@ -28,6 +37,8 @@ const Leaderboard = () => {
                     )) }
                 </tbody>
             </table>
+        </div>
+
         </div>
     )
 }

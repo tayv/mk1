@@ -4,6 +4,14 @@
     border: 5px solid white;
   } 
 
+  .Leaderboard-filter {
+    padding: 1rem;
+    border: 5px solid white;
+
+    display: flex;
+    justify-content: flex-end;
+  }
+
   table {
     border-collapse: collapse;
     width: 100%;
