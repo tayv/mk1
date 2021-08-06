@@ -1,0 +1,28 @@
+.Leaderboard-container {
+    width: 80vw;
+    padding: 1rem;
+    border: 5px solid white;
+  } 
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th,
+  td {
+    border: 1px solid #ffffff;
+    text-align: left;
+    padding: 8px;
+    font-size: 32px;
+  }
+  
+  th {
+    background-color: rgb(80, 80, 80);
+  }
+  
+  td {
+    background-color: rgb(80, 80, 80);
+  }
+  
+  
