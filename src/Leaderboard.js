@@ -8,7 +8,7 @@ const Leaderboard = () => {
             <thead>
                 <tr>
                     <th></th>
-                    <th>Racer</th>
+                    <th colspan="2">Racer</th>
                     <th>Points</th>
                     <th>Change</th>
                 </tr>
@@ -16,73 +16,85 @@ const Leaderboard = () => {
             <tbody>
                 <tr>
                     <td>🏆</td>
-                    <td>Racer 1</td>
+                    <td>[avatar]</td>
+                    <td>Racer Name</td>
                     <td>0</td>
                     <td>-</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td>Racer 2</td>
+                    <td>[avatar]</td>
+                    <td>Racer Name</td>
                     <td>0</td>
                     <td>-</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td>Racer 2</td>
+                    <td>[avatar]</td>
+                    <td>Racer Name</td>
                     <td>0</td>
                     <td>-</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td>Racer 2</td>
+                    <td>[avatar]</td>
+                    <td>Racer Name</td>
                     <td>0</td>
                     <td>-</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td>Racer 2</td>
+                    <td>[avatar]</td>
+                    <td>Racer Name</td>
                     <td>0</td>
                     <td>-</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td>Racer 2</td>
+                    <td>[avatar]</td>
+                    <td>Racer Name</td>
                     <td>0</td>
                     <td>-</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td>Racer 2</td>
+                    <td>[avatar]</td>
+                    <td>Racer Name</td>
                     <td>0</td>
                     <td>-</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td>Racer 2</td>
+                    <td>[avatar]</td>
+                    <td>Racer Name</td>
                     <td>0</td>
                     <td>-</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td>Racer 2</td>
+                    <td>[avatar]</td>
+                    <td>Racer Name</td>
                     <td>0</td>
                     <td>-</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td>Racer 2</td>
+                    <td>[avatar]</td>
+                    <td>Racer Name</td>
                     <td>0</td>
                     <td>-</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td>Racer 2</td>
+                    <td>[avatar]</td>
+                    <td>Racer Name</td>
                     <td>0</td>
                     <td>-</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td>Racer 2</td>
+                    <td>[avatar]</td>
+                    <td>Racer Name</td>
                     <td>0</td>
                     <td>-</td>
                 </tr>
