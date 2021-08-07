@@ -1,5 +1,5 @@
 import React, { useState } from 'react'; 
-import racerData from './racer-data.json';
+import racerData from '../../racer-data.json';
 
 const SeasonResults = () => {
     const [racers, setRacers] = useState(racerData);

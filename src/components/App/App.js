@@ -1,6 +1,6 @@
 import './App.css';
-import Header from './Header.js'
-import Leaderboard from './Leaderboard';
+import Header from '../Header/Header.js'
+import Leaderboard from '../Leaderboard/Leaderboard.js';
 
 function App() {
   return (

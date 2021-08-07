@@ -1,21 +1,15 @@
 import React, { useState } from 'react'; 
 import './Leaderboard.css';
-import SeasonResults from './SeasonResults.js';
+
+import SeasonResults from '../SeasonResults/SeasonResults.js';
+import SeasonFilter from '../SeasonFilter/SeasonFilter.js';
   
 const Leaderboard = () => {
    
 
     return  (
         <div className="Leaderboard-container">
-            <div className="Leaderboard-filter"> 
-                <label for="season" style={{visibility: "hidden"}}>Season: </label>
-                <select name="season" id="season">
-                    <option value="season1">Season 1</option>
-                    <option value="season2">Season 2</option>
-                    <option value="alltime">All Time</option>
-                </select> 
-            </div>
-        
+            <SeasonFilter />
         <div>
             <table>
                 <thead>
