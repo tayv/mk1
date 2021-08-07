@@ -1,0 +1,37 @@
+.Leaderboard-container {
+    width: 80vw;
+    padding: 1rem;
+    border: 5px solid white;
+    overflow-x:auto; /* To allow horizontal scrolling at small screen sizes */
+  } 
+
+  .Leaderboard-filter {
+    padding: 1rem;
+    border: 5px solid white;
+
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th,
+  td {
+    border: 1px solid #ffffff;
+    text-align: left;
+    padding: 8px;
+    font-size: 32px;
+  }
+  
+  th {
+    background-color: rgb(80, 80, 80);
+  }
+  
+  td {
+    background-color: rgb(80, 80, 80);
+  }
+  
+  
