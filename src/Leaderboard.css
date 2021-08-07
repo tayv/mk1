@@ -2,6 +2,7 @@
     width: 80vw;
     padding: 1rem;
     border: 5px solid white;
+    overflow-x:auto; /* To allow horizontal scrolling at small screen sizes */
   } 
 
   .Leaderboard-filter {

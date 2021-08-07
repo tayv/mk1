@@ -1,120 +1,398 @@
 [
     {
         "id": 1,
-        "avatar": "avatar img",
+        "avatar": "avatar",
         "name": "Racer Name",
-        "points": 0,
-        "change": "-",
-        "trophy": "🏆",
-        "results": {
-            "season1": {
-                "participated": true,
-                "position": null,
-                "champion": false,
-                "gold": 0,
-                "silver": 0,
-                "bronze": 0,
-                "pole": 0,
-                "missedRaces": 0
-            },
-            "season2": {
-                "participated": true,
-                "position": null,
-                "champion": false,
-                "gold": 0,
-                "silver": 0,
-                "bronze": 0,
-                "pole": 0,
-                "missedRaces": 0
-            }
+        "allTime": {
+            "rank": "",
+            "trophies": ""
+        },
+        "season1": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        },
+        "season": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
         }
     },
     {
         "id": 2,
-        "avatar": "avatar img",
+        "avatar": "avatar",
         "name": "Racer Name",
-        "points": 0,
-        "change": "-",
-        "trophy": null
+        "allTime": {
+            "rank": "",
+            "trophies": ""
+        },
+        "season1": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        },
+        "season": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        }
     },
     {
         "id": 3,
-        "avatar": "avatar img",
+        "avatar": "avatar",
         "name": "Racer Name",
-        "points": 0,
-        "change": "-",
-        "trophy": null
+        "allTime": {
+            "rank": "",
+            "trophies": ""
+        },
+        "season1": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        },
+        "season": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        }
     },
     {
         "id": 4,
-        "avatar": "avatar img",
+        "avatar": "avatar",
         "name": "Racer Name",
-        "points": 0,
-        "change": "-",
-        "trophy": null
+        "allTime": {
+            "rank": "",
+            "trophies": ""
+        },
+        "season1": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        },
+        "season": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        }
     },
     {
         "id": 5,
-        "avatar": "avatar img",
+        "avatar": "avatar",
         "name": "Racer Name",
-        "points": 0,
-        "change": "-",
-        "trophy": null
+        "allTime": {
+            "rank": "",
+            "trophies": ""
+        },
+        "season1": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        },
+        "season": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        }
     },
     {
         "id": 6,
-        "avatar": "avatar img",
+        "avatar": "avatar",
         "name": "Racer Name",
-        "points": 0,
-        "change": "-",
-        "trophy": null
+        "allTime": {
+            "rank": "",
+            "trophies": ""
+        },
+        "season1": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        },
+        "season": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        }
     },
     {
         "id": 7,
-        "avatar": "avatar img",
+        "avatar": "avatar",
         "name": "Racer Name",
-        "points": 0,
-        "change": "-",
-        "trophy": null
+        "allTime": {
+            "rank": "",
+            "trophies": ""
+        },
+        "season1": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        },
+        "season": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        }
     },
     {
         "id": 8,
-        "avatar": "avatar img",
+        "avatar": "avatar",
         "name": "Racer Name",
-        "points": 0,
-        "change": "-",
-        "trophy": null
+        "allTime": {
+            "rank": "",
+            "trophies": ""
+        },
+        "season1": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        },
+        "season": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        }
     },
     {
         "id": 9,
-        "avatar": "avatar img",
+        "avatar": "avatar",
         "name": "Racer Name",
-        "points": 0,
-        "change": "-",
-        "trophy": null
+        "allTime": {
+            "rank": "",
+            "trophies": ""
+        },
+        "season1": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        },
+        "season": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        }
     },
     {
         "id": 10,
-        "avatar": "avatar img",
+        "avatar": "avatar",
         "name": "Racer Name",
-        "points": 0,
-        "change": "-",
-        "trophy": null
+        "allTime": {
+            "rank": "",
+            "trophies": ""
+        },
+        "season1": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        },
+        "season": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        }
     },
     {
         "id": 11,
-        "avatar": "avatar img",
+        "avatar": "avatar",
         "name": "Racer Name",
-        "points": 0,
-        "change": "-",
-        "trophy": null
+        "allTime": {
+            "rank": "",
+            "trophies": ""
+        },
+        "season1": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        },
+        "season": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        }
     },
     {
         "id": 12,
-        "avatar": "avatar img",
+        "avatar": "avatar",
         "name": "Racer Name",
-        "points": 0,
-        "change": "-",
-        "trophy": null
+        "allTime": {
+            "rank": "",
+            "trophies": ""
+        },
+        "season1": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        },
+        "season": {
+            "participated": true,
+            "position": null,
+            "overall": "-",
+            "points": 0,
+            "change": "-",
+            "goldMedals": 0,
+            "silverMedals": 0,
+            "bronzeMedals": 0,
+            "poles": 0,
+            "missedRaces": 0
+        }
     }
 ]
