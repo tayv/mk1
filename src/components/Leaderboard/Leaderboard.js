@@ -5,11 +5,15 @@ import SeasonResults from '../SeasonResults/SeasonResults.js';
 import SeasonFilter from '../SeasonFilter/SeasonFilter.js';
   
 const Leaderboard = () => {
-   
+    const [season, setSeason] = useState("season2");
+
+    const onSeasonFilterChange = (value) => {
+        setSeason(value);   
+       }
 
     return  (
         <div className="Leaderboard-container">
-            <SeasonFilter value={"season2"}/>
+            <SeasonFilter value={season} onChange={onSeasonFilterChange}/>
         <div>
             <table>
                 <thead>
