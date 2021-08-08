@@ -9,7 +9,7 @@ const Leaderboard = () => {
 
     return  (
         <div className="Leaderboard-container">
-            <SeasonFilter />
+            <SeasonFilter value={"season2"}/>
         <div>
             <table>
                 <thead>

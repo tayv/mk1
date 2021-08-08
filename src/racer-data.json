@@ -11,15 +11,15 @@
             "participated": true,
             "position": null,
             "overall": "-",
-            "points": 0,
+            "points": 10,
             "change": "-",
-            "goldMedals": 0,
-            "silverMedals": 0,
-            "bronzeMedals": 0,
-            "poles": 0,
+            "goldMedals": 10,
+            "silverMedals": 10,
+            "bronzeMedals": 10,
+            "poles": 10,
             "missedRaces": 0
         },
-        "season": {
+        "season2": {
             "participated": true,
             "position": null,
             "overall": "-",
