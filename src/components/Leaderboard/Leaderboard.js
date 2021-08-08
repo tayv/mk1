@@ -24,7 +24,7 @@ const Leaderboard = () => {
                         <th>Change</th>
                     </tr>
                 </thead>
-                    <SeasonResults />
+                    <SeasonResults season={season} />
             </table>
         </div>
 
