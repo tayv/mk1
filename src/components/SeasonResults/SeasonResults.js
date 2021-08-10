@@ -9,8 +9,8 @@ const SeasonResults = (props) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const fetchURL = `https://sheets.googleapis.com/v4/spreadsheets/{${spreadsheetID}}?key=${apiKey}` ; 
-            // add this to dependency array if define outside file
+            const fetchURL = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetID}?key=${apiKey}` ; 
+            // add this to dependency array if define outside file since each time it updates you'll need to refetch data
             console.log(fetchURL);
             const request = await axios.get(fetchURL);
             setRacers([request]);
