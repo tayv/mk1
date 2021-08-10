@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react'; 
 import axios from 'axios';
 
+const spreadsheetID = process.env.REACT_APP_GOOGLE_SPREADSHEET_ID;
+const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
+
 const SeasonResults = (props) => {
     const [racers, setRacers] = useState([]);
-    // this new way changed the response data somehow. now no request.data
-    const fetchData = async () => {
-        const request = await axios.get("https://jsonplaceholder.typicode.com/todos/1");
-        setRacers([request]);
-        console.log(racers);
-    }
 
     useEffect(() => {
+        const fetchData = async () => {
+            const fetchURL = `https://sheets.googleapis.com/v4/spreadsheets/{${spreadsheetID}}?key=${apiKey}` ; 
+            // add this to dependency array if define outside file
+            console.log(fetchURL);
+            const request = await axios.get(fetchURL);
+            setRacers([request]);
+        }
 
         fetchData();
 
