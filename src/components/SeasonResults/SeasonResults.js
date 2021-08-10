@@ -1,11 +1,13 @@
 import React, { useState } from 'react'; 
 import racerData from '../../racer-data.json';
+import RacerList from '../RacerList';
 
 const SeasonResults = (props) => {
     const [racers, setRacers] = useState(racerData);
 
     return (
         <tbody>
+        <RacerList season={props.season} />
         { racers.map( (racer) => (
             <tr>
                 <td>{ racer.[props.season].goldMedals }</td>
