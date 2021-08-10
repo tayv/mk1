@@ -5,3 +5,5 @@ const instance = axios.create({
 })
 
 export default instance;
+
+// currently unused. may use env variable instead
