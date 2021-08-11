@@ -20,6 +20,7 @@ const SeasonResults = (props) => {
 
     }, [props.season]);
 
+
     return (
         <tbody>
           { racers.map( (racer) => (
