@@ -19,7 +19,7 @@ const Leaderboard = () => {
                 <thead>
                     <tr>
                         <th></th>
-                        <th colspan="2">Racer</th>
+                        <th colSpan="2">Racer</th>
                         <th>Points</th>
                         <th>Change</th>
                     </tr>
