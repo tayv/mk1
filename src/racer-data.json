@@ -4,8 +4,7 @@
         "avatar": "avatar",
         "name": "Racer Name",
         "allTime": {
-            "rank": "",
-            "trophies": ""
+            "championships": ""
         },
         "season1": {
             "participated": true,
