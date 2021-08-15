@@ -50,7 +50,8 @@ const SeasonResults = (props) => {
             
             updateRacerData(13);
 
-            // sheetsArray used to store each sheets data
+
+            // sheetsArray used to store each sheets data. Later iterate through this to update season specific data.
             const sheetsArray = [];
             const updateSheetsArray = (doc) => {
                 for (let i=0; i<doc.sheetCount; i++) {
@@ -73,8 +74,13 @@ const SeasonResults = (props) => {
                 
                 for (let i=0; i<seasonArray.length; i++) {
 
+                    if (sheetsArray[i].title === "racerList") {
+                        // Skip racerList sheets as only want to set season data here.
+                        return
+                    }
+
                     let rowsAllSeasons = [];
-                    rowsAllSeasons[i] = await sheetsArray[1].getRows().then((response) => {
+                    rowsAllSeasons[i] = await sheetsArray[i].getRows().then((response) => {
                         
                         // limit to statsRacers length so that you only loop through rows for how many racers there are
                         for (let j=0; j<statsRacers.length; j++) {
