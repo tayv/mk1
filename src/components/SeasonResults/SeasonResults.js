@@ -45,7 +45,6 @@ const SeasonResults = (props) => {
                        }
 
                     };
-                  console.log(statsRacers)
                  }
             }
             
@@ -56,24 +55,36 @@ const SeasonResults = (props) => {
             const updateSeasonData = async (seasonArray) => { 
                 
                 for (let i=0; i<seasonArray.length; i++) {
+
                     let rowsAllSeasons = [];
                     rowsAllSeasons[i] = await sheetSeason1.getRows().then((response) => {
                         
+                        
+                        // limit to statsRacers length so that you only loop through rows for how many racers there are
+                        for (let j=1; j<statsRacers.length; j++) {
+                            if (response[j].name === undefined) {
+                                // filter out empty rows for each season since racerList holds alltime number of racers 
+                                return
+                            }
+                            console.log(response[j].name)
+                        }
+                        
+
                         // statsBySeason is an array saved to state. 
                         // Dynamically add an object to statsBySeason array for each season by using i
                         statsBySeason["season" + (i + 1)] =  {
-                            standings: [{
+                            standings: [ {
                                 rank: response[i].rank,
                                 name: response[i].name,
                                 points: response[i].points
-                            }]
+                            } ]
                             
                             
                             
                         
                         };
 
-                        console.log(statsBySeason)
+                      //  console.log(statsBySeason)
                     })
 
                     // add a key for each season to statsSeason array of objects
