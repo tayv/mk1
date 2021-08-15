@@ -50,6 +50,23 @@ const SeasonResults = (props) => {
             
             updateRacerData(13);
 
+            // sheetsArray used to store each sheets data
+            const sheetsArray = [];
+            const updateSheetsArray = (doc) => {
+                for (let i=0; i<doc.sheetCount; i++) {
+                    sheetsArray[i] = doc.sheetsByIndex[i];
+            
+                }
+                console.log(sheetsArray)
+
+         
+            }
+            
+           updateSheetsArray(doc);
+
+
+             
+
             // To update a single season's records
             // Season name is an array of strings using format: seasonX (e.g. [season1, seaons2])
             const updateSeasonData = async (seasonArray) => { 
@@ -57,47 +74,47 @@ const SeasonResults = (props) => {
                 for (let i=0; i<seasonArray.length; i++) {
 
                     let rowsAllSeasons = [];
-                    rowsAllSeasons[i] = await sheetSeason1.getRows().then((response) => {
-                        
+                    rowsAllSeasons[i] = await sheetsArray[1].getRows().then((response) => {
                         
                         // limit to statsRacers length so that you only loop through rows for how many racers there are
-                        for (let j=1; j<statsRacers.length; j++) {
+                        for (let j=0; j<statsRacers.length; j++) {
+
                             if (response[j].name === undefined) {
                                 // filter out empty rows for each season since racerList holds alltime number of racers 
                                 return
                             }
-                            console.log(response[j].name)
+
+                            console.log(response[j].name);
+                            
                         }
                         
 
                         // statsBySeason is an array saved to state. 
                         // Dynamically add an object to statsBySeason array for each season by using i
+                        // add a key for each season to organize statsSeason 
+                        // add 1 to iterator since index starts at zero
                         statsBySeason["season" + (i + 1)] =  {
                             standings: [ {
                                 rank: response[i].rank,
                                 name: response[i].name,
                                 points: response[i].points
                             } ]
-                            
-                            
-                            
+              
                         
                         };
 
-                      //  console.log(statsBySeason)
+             
                     })
 
-                    // add a key for each season to statsSeason array of objects
-                    // add 1 to iterator since index starts at zero
+                    
                     
 
                 }
             }
           
-            updateSeasonData(["season1", "season2"]);
+            updateSeasonData(sheetsArray);
             console.log(statsBySeason);
-           // console.log("sheeDataRacerList: ", statsRacers);
-           // console.log(sheet.headerValues[2])
+
           }());
      
     }, [props.season]); 
