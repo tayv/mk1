@@ -56,8 +56,9 @@ const SeasonResults = (props) => {
             const updateSeasonData = (seasonName) => { 
                 for (let i=0; i<seasonName.length; i++) {
                     // add a key for each season to statsSeason array of objects
-                    statsSeasons["season" + i] =  {
-               
+                    // add 1 to iterator since index starts at zero
+                    statsSeasons["season" + (i + 1)] =  {
+                        overall: rowsSeason1.rank
                     
                     };
 
