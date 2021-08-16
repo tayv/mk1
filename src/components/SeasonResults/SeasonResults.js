@@ -57,7 +57,6 @@ const SeasonResults = (props) => {
             const updateSheetsArray = (doc) => {
                 for (let i=0; i<doc.sheetCount; i++) {
                     sheetsArray[i] = doc.sheetsByIndex[i];
-                    
                 }
 
                 // Use regex to check if sheet name contains "season"
@@ -90,13 +89,7 @@ const SeasonResults = (props) => {
                 
                 for (let i=0; i<seasonArray.length; i++) {
 
-                    const regexMatchSeason = /season/mg;
-                    const currentSeason = sheetsArray[i].title;
-             
-                    // Use regex to check if sheet name contains "season"
-                    if ( !currentSeason.match(regexMatchSeason) ) {
-                       // Only want season sheets so do nothing for all other sheets   
-                    } else {
+                     
                         // works so long as google sheets follow sheetx naming conventions for seasons
                         statsBySeason[sheetsArray[i].title] = {};
 
@@ -134,7 +127,7 @@ const SeasonResults = (props) => {
                             }
                 
                         })
-                    }
+                    
 
                 }
             }
