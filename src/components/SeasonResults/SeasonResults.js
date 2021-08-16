@@ -15,6 +15,7 @@ const statsBySeason = [];
 
 const SeasonResults = (props) => {
     const [racers, setRacers] = useState([]);
+    const [seasonArray, setSeason] = useState([]);
 
     useEffect(() => {
 
@@ -56,15 +57,30 @@ const SeasonResults = (props) => {
             const updateSheetsArray = (doc) => {
                 for (let i=0; i<doc.sheetCount; i++) {
                     sheetsArray[i] = doc.sheetsByIndex[i];
-            
+                    
                 }
-                console.log(sheetsArray)
 
+                // Use regex to check if sheet name contains "season"
+                const regexMatchSeason = /season/mg;
+                // Create a list of season sheets titles. Dynamically updates so we know how much data to grab in updateSeasonData()
+                let seasonArray = sheetsArray.map( season => {
+                    // if sheet name includes "season" then add it to array
+                    if ( season.title.match(regexMatchSeason) ) {
+                        return season.title;
+                    } else {
+                        // not a season data sheet so will return undefined. These are filtered out below
+                        return 
+                    }
+                })
+                // Filter out falsy aka undefined values resulting from failing map condition above
+                seasonArray = seasonArray.filter(Boolean);
+                // Update the state with the latest seasonArray
+                setSeason(seasonArray);
          
             }
             
            updateSheetsArray(doc);
-
+            
 
              
 
@@ -74,9 +90,15 @@ const SeasonResults = (props) => {
                 
                 for (let i=0; i<seasonArray.length; i++) {
 
-                    if (sheetsArray[i].title === "racerList") {
-                        // Do nothing for racerList sheets as only want to set season data.
+                    const regexMatchSeason = /season/mg;
+                    const currentSeason = sheetsArray[i].title;
+             
+                    // Use regex to check if sheet name contains "season"
+                    if ( !currentSeason.match(regexMatchSeason) ) {
+                       // Only want season sheets so do nothing for all other sheets   
                     } else {
+                        // works so long as google sheets follow sheetx naming conventions for seasons
+                        statsBySeason[sheetsArray[i].title] = {};
 
                         let rowsAllSeasons = [];
                         rowsAllSeasons[i] = await sheetsArray[i].getRows().then((response) => {
@@ -91,14 +113,23 @@ const SeasonResults = (props) => {
                                     // Dynamically add an object to statsBySeason array for each season by using i
                                     // add a key for each season to organize statsSeason 
                                     // add 1 to iterator since index starts at zero
-                                    statsBySeason["season" + (i + 1)] =  {
+                                 /*   statsBySeason["season" + (i + 1)] =  {
                                         standings: [ {
-                                            rank: response[i].rank,
-                                            name: response[i].name,
-                                            points: response[i].points
+                                            rank: response[j].rank,
+                                            name: response[j].name,
+                                            points: response[j].points
                                         } ]
-                                    }
+                                    } */
 
+                                    let racer = response[j].name;
+                                    
+                                    racer = {
+                                        rank: response[j].rank,
+                                        name: response[j].name,
+                                        points: response[j].points
+                                    } 
+
+                                    statsBySeason.push(racer);
                                 }
                             }
                 
@@ -109,7 +140,7 @@ const SeasonResults = (props) => {
             }
           
             updateSeasonData(sheetsArray);
-            console.log(statsBySeason);
+            console.log("STATS BY SEEASON: ", statsBySeason);
 
           }());
      
