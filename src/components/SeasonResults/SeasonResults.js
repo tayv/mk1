@@ -75,45 +75,35 @@ const SeasonResults = (props) => {
                 for (let i=0; i<seasonArray.length; i++) {
 
                     if (sheetsArray[i].title === "racerList") {
-                        // Skip racerList sheets as only want to set season data here.
-                        return
-                    }
+                        // Do nothing for racerList sheets as only want to set season data.
+                    } else {
 
-                    let rowsAllSeasons = [];
-                    rowsAllSeasons[i] = await sheetsArray[i].getRows().then((response) => {
-                        
-                        // limit to statsRacers length so that you only loop through rows for how many racers there are
-                        for (let j=0; j<statsRacers.length; j++) {
-
-                            if (response[j].name === undefined) {
-                                // filter out empty rows for each season since racerList holds alltime number of racers 
-                                return
-                            }
-
-                            console.log(response[j].name);
+                        let rowsAllSeasons = [];
+                        rowsAllSeasons[i] = await sheetsArray[i].getRows().then((response) => {
                             
-                        }
-                        
+                            // limit to statsRacers length so that you only loop through rows for how many racers there are
+                            for (let j=0; j<statsRacers.length; j++) {
 
-                        // statsBySeason is an array saved to state. 
-                        // Dynamically add an object to statsBySeason array for each season by using i
-                        // add a key for each season to organize statsSeason 
-                        // add 1 to iterator since index starts at zero
-                        statsBySeason["season" + (i + 1)] =  {
-                            standings: [ {
-                                rank: response[i].rank,
-                                name: response[i].name,
-                                points: response[i].points
-                            } ]
-              
-                        
-                        };
+                                if (response[j].name === undefined) {
+                                    // do nothing for empty rows since racerList holds all time number of racers 
+                                } else {
+                                    // statsBySeason is an array saved to state. 
+                                    // Dynamically add an object to statsBySeason array for each season by using i
+                                    // add a key for each season to organize statsSeason 
+                                    // add 1 to iterator since index starts at zero
+                                    statsBySeason["season" + (i + 1)] =  {
+                                        standings: [ {
+                                            rank: response[i].rank,
+                                            name: response[i].name,
+                                            points: response[i].points
+                                        } ]
+                                    }
 
-             
-                    })
-
-                    
-                    
+                                }
+                            }
+                
+                        })
+                    }
 
                 }
             }
