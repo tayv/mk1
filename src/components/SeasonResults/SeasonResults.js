@@ -13,6 +13,7 @@ doc.useApiKey(apiKey);
 const statsRacers = [];
 const statsBySeason = [];
 
+
 const SeasonResults = (props) => {
     const [racers, setRacers] = useState([]);
     const [sheetList, setSheetList] = useState([]);
@@ -23,14 +24,57 @@ const SeasonResults = (props) => {
         (async function() {
             await doc.loadInfo();
         
-            // get all sheets then convert the object to an array so we can iterate through and get all the row data below
-            const sheetsAll = Object.values(doc.sheetsByTitle)
-      //      console.log(Array.isArray(sheetsAll), sheetsAll )
+            // get an array of all sheets as objects 
+            const sheetsAll = doc.sheetsByIndex;
+            console.log("sheetsALL:", sheetsAll )
 
-            const rowsAll = sheetsAll.map( (sheet) => {
-                console.log("ypu", sheet.getRows())
+            // WORK IN PROGRESS. TRYING TO GET ROWS FROM EACH SHEET AND SAVE TO A NEW ARRAY
+            sheetsAll.forEach((sheet) => {
+               
+                // Regex to check if sheet name contains string "season"
+                const regexMatchSeason = /season/mg;
+
+                if (sheet.title === "racerList") {
+                    //console.log("RACERLIST", sheet.title)
+
+                    async function printRows() {
+                        const rowsRacerList = await sheet.getRows();
+                      
+                        // Cannot use forEach() with promises. Need to use Promise.all with map() to get an array of promises
+                        // See https://stackoverflow.com/questions/37576685/using-async-await-with-a-foreach-loop
+                        await Promise.all(rowsRacerList.map(async (row) => {
+                            
+                            let newRacer = {
+                            id: row.id,
+                            avatar: row.avatar,
+                            name: row.name,
+                            allTime: {
+                                championships: row.championships,
+                                participated: row.participated
+                                }
+                            }
+                            racers.push(newRacer)
+
+                          console.log("RCERS", racers)
+                        }));
+                      }
+                      printRows()
+
+                   
+                    
+                   // console.log(rowsRacerList[1].name);  
+                } else if (sheet.title.match(regexMatchSeason)) {
+                    // Get all the season specific data
+                    seasonList.push(sheet.title);
+                    return seasonList;
+
+                } else {
+                    console.log("Check the sheet names. This sheet either needs to be renamed or added into SeasonResults logic")
+                }
+               
             }) 
-
+/*
+            console.log("here", seasonList)
             const sheetRacerList = doc.sheetsByIndex[0];
             const sheetSeason1 = doc.sheetsByIndex[1];
             const sheetSeason2 = doc.sheetsByIndex[2];
@@ -57,7 +101,7 @@ const SeasonResults = (props) => {
             updateRacerData(13);
 
          
-
+/*
             // sheetsArray used to store each sheets data. Later iterate through this to update season specific data.
             const sheetsArray = [];
             const updateSheetsArray = (doc) => {
@@ -82,9 +126,9 @@ const SeasonResults = (props) => {
                 // Update the state with the latest seasonList
                 setSeason(seasonList);
          
-            }
+            } 
             
-           updateSheetsArray(doc);
+           updateSheetsArray(doc); */
             
 
 
@@ -148,7 +192,7 @@ const SeasonResults = (props) => {
             }
           
             updateSeasonData(seasonList);
-            console.log("SHEETS: ", sheetsArray[0]);
+            
 
           }());
      
