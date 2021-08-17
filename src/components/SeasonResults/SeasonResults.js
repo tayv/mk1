@@ -15,23 +15,28 @@ const statsBySeason = [];
 
 const SeasonResults = (props) => {
     const [racers, setRacers] = useState([]);
-    const [seasonArray, setSeason] = useState([]);
+    const [sheetList, setSheetList] = useState([]);
+    const [seasonList, setSeason] = useState([]);
 
     useEffect(() => {
 
         (async function() {
             await doc.loadInfo();
-         
-            const sheetRacerList = doc.sheetsByIndex[0];
         
+            // get all sheets then convert the object to an array so we can iterate through and get all the row data below
+            const sheetsAll = Object.values(doc.sheetsByTitle)
+      //      console.log(Array.isArray(sheetsAll), sheetsAll )
+
+            const rowsAll = sheetsAll.map( (sheet) => {
+                console.log("ypu", sheet.getRows())
+            }) 
+
+            const sheetRacerList = doc.sheetsByIndex[0];
             const sheetSeason1 = doc.sheetsByIndex[1];
             const sheetSeason2 = doc.sheetsByIndex[2];
          
             const rowsRacerList = await sheetRacerList.getRows(); // can pass in { limit, offset }
-           // const rowsSeason1 = await sheetSeason1.getRows();
-           // const rowsSeason2 = await sheetSeason2.getRows();
             
-
             const updateRacerData = (rowLimit) => {
                 // updateRacer() updates racers state object 
                 // rowLimit is a number used to limit the number of rows looped through. Should be equal to number of racers +1 (because of heading row)
@@ -51,6 +56,7 @@ const SeasonResults = (props) => {
             
             updateRacerData(13);
 
+         
 
             // sheetsArray used to store each sheets data. Later iterate through this to update season specific data.
             const sheetsArray = [];
@@ -62,7 +68,7 @@ const SeasonResults = (props) => {
                 // Use regex to check if sheet name contains "season"
                 const regexMatchSeason = /season/mg;
                 // Create a list of season sheets titles. Dynamically updates so we know how much data to grab in updateSeasonData()
-                let seasonArray = sheetsArray.map( season => {
+                let seasonList = sheetsArray.map( season => {
                     // if sheet name includes "season" then add it to array
                     if ( season.title.match(regexMatchSeason) ) {
                         return season.title;
@@ -72,22 +78,27 @@ const SeasonResults = (props) => {
                     }
                 })
                 // Filter out falsy aka undefined values resulting from failing map condition above
-                seasonArray = seasonArray.filter(Boolean);
-                // Update the state with the latest seasonArray
-                setSeason(seasonArray);
+                seasonList = seasonList.filter(Boolean);
+                // Update the state with the latest seasonList
+                setSeason(seasonList);
          
             }
             
            updateSheetsArray(doc);
             
 
-             
 
             // To update a single season's records
             // Season name is an array of strings using format: seasonX (e.g. [season1, seaons2])
-            const updateSeasonData = async (seasonArray) => { 
-                
-                for (let i=0; i<seasonArray.length; i++) {
+            const updateSeasonData = async (seasonList) => { 
+                console.log("wurk", seasonList)
+                seasonList.forEach( (season) => {
+
+                    console.log("SEAS", season.title);
+                })
+
+                /*
+                for (let i=0; i<seasonList.length; i++) {
 
                      
                         // works so long as google sheets follow sheetx naming conventions for seasons
@@ -106,13 +117,13 @@ const SeasonResults = (props) => {
                                     // Dynamically add an object to statsBySeason array for each season by using i
                                     // add a key for each season to organize statsSeason 
                                     // add 1 to iterator since index starts at zero
-                                 /*   statsBySeason["season" + (i + 1)] =  {
+                                    statsBySeason["season" + (i + 1)] =  {
                                         standings: [ {
                                             rank: response[j].rank,
                                             name: response[j].name,
                                             points: response[j].points
                                         } ]
-                                    } */
+                                    } 
 
                                     let racer = response[j].name;
                                     
@@ -123,21 +134,26 @@ const SeasonResults = (props) => {
                                     } 
 
                                     statsBySeason.push(racer);
+
+
                                 }
+                                
                             }
+                            
                 
-                        })
+                        }) 
                     
 
-                }
+                } */
             }
           
-            updateSeasonData(sheetsArray);
-            console.log("STATS BY SEEASON: ", statsBySeason);
+            updateSeasonData(seasonList);
+            console.log("SHEETS: ", sheetsArray[0]);
 
           }());
      
     }, [props.season]); 
+
     /*
     useEffect(() => {
         const fetchData = async () => {
