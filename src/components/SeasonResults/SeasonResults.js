@@ -28,22 +28,19 @@ const SeasonResults = (props) => {
             const sheetsAll = doc.sheetsByIndex;
             console.log("sheetsALL:", sheetsAll )
 
-            // WORK IN PROGRESS. TRYING TO GET ROWS FROM EACH SHEET AND SAVE TO A NEW ARRAY
             sheetsAll.forEach((sheet) => {
                
-                // Regex to check if sheet name contains string "season"
+                // Regex used to check if sheet name contains string "season"
                 const regexMatchSeason = /season/mg;
-
                 if (sheet.title === "racerList") {
-                    //console.log("RACERLIST", sheet.title)
-
+                    // If we're on the racerList sheet then grab all the row data
                     async function printRows() {
                         const rowsRacerList = await sheet.getRows();
                       
                         // Cannot use forEach() with promises. Need to use Promise.all with map() to get an array of promises
                         // See https://stackoverflow.com/questions/37576685/using-async-await-with-a-foreach-loop
                         await Promise.all(rowsRacerList.map(async (row) => {
-                            
+                            // Each racer will have an object referencing their overall stats
                             let newRacer = {
                             id: row.id,
                             avatar: row.avatar,
@@ -53,15 +50,14 @@ const SeasonResults = (props) => {
                                 participated: row.participated
                                 }
                             }
+                            // add each racers profile to the racers state
                             racers.push(newRacer)
-
-                          console.log("RCERS", racers)
                         }));
+                        // set state now that array is updated
+                        setRacers(racers);
                       }
                       printRows()
-
-                   
-                    
+ 
                    // console.log(rowsRacerList[1].name);  
                 } else if (sheet.title.match(regexMatchSeason)) {
                     // Get all the season specific data
@@ -216,8 +212,8 @@ const SeasonResults = (props) => {
     return (
         <tbody>
           { racers.map( (racer) => (
-                <tr key={racer.data.id}>
-                    <td>{ racer.data.title }</td>
+                <tr key={racer.id}>
+                    <td>{ racer.name }</td>
                 </tr>
             )) }
         </tbody>
