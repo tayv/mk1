@@ -41,13 +41,13 @@ const SeasonResults = (props) => {
                         await Promise.all(rowsRacerList.map(async (row) => {
                             // Each racer will have an object referencing their overall stats
                             let newRacer = {
-                            id: row.id,
-                            avatar: row.avatar,
-                            name: row.name,
-                            allTime: {
-                                championships: row.championships,
-                                participated: row.participated
-                                }
+                                id: row.id,
+                                avatar: row.avatar,
+                                name: row.name,
+                                allTime: {
+                                    championships: row.championships,
+                                    participated: row.participated
+                                    }
                             }
                             // add each racers profile to the racers' state
                             racers.push(newRacer)
@@ -60,29 +60,31 @@ const SeasonResults = (props) => {
                 } else if (sheet.title.match(regexMatchSeason)) {
        
                     async function printSeasonRows() {
-                    // limit should be updated to be dynamic based on number of racers in racerList sheet. 
-                    // This will break if more than 13 racers added in a season    
-                    const rowsSeasonList = await sheet.getRows({limit: 13});
+                        // limit should be updated to be dynamic based on number of racers in racerList sheet. 
+                        // This will break if more than 13 racers added in a season    
+                        const rowsSeasonList = await sheet.getRows({limit: 13});
+                        let seasonResults = [];
 
-                    await Promise.all(rowsSeasonList.map(async (row) => {
-
-                        let seasonRow = {
-                            rank: row.rank,
-                            name: row.name,
-                            points: row.points
-                        }
-
-                        seasonList.push ({
-                            [sheet.title]: seasonRow
-                        })
+                        await Promise.all(rowsSeasonList.map(async (row) => {
                         
-                       // seasonList.push(row[sheet.title])
-                        console.log("HURR", seasonList)
+                            
 
-                    }))
+                            let seasonRacerRow = {
+                                rank: row.rank,
+                                name: row.name,
+                                points: row.points
+                            }
 
+                            seasonResults.push(seasonRacerRow);
+                            // seasonResults[sheet.title] = seasonRacerRow;
 
-                }
+                        }))
+                        
+                        seasonList.push(seasonResults);
+                        console.log("HURR", seasonList);
+            
+
+                     }
 
                 printSeasonRows();
 
