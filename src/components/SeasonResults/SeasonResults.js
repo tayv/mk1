@@ -22,21 +22,20 @@ const SeasonResults = (props) => {
     useEffect(() => {
 
         (async function() {
+            // load the google sheet 
             await doc.loadInfo();
         
             // get an array of all sheets as objects 
             const sheetsAll = doc.sheetsByIndex;
             console.log("sheetsALL:", sheetsAll )
 
-            sheetsAll.forEach((sheet) => {
-               
+            sheetsAll.forEach((sheet) => {            
                 // Regex used to check if sheet name contains string "season"
                 const regexMatchSeason = /season/mg;
                 if (sheet.title === "racerList") {
                     // If we're on the racerList sheet then grab all the row data
                     async function printRows() {
                         const rowsRacerList = await sheet.getRows();
-                      
                         // Cannot use forEach() with promises. Need to use Promise.all with map() to get an array of promises
                         // See https://stackoverflow.com/questions/37576685/using-async-await-with-a-foreach-loop
                         await Promise.all(rowsRacerList.map(async (row) => {
@@ -50,25 +49,49 @@ const SeasonResults = (props) => {
                                 participated: row.participated
                                 }
                             }
-                            // add each racers profile to the racers state
+                            // add each racers profile to the racers' state
                             racers.push(newRacer)
                         }));
                         // set state now that array is updated
                         setRacers(racers);
                       }
                       printRows()
- 
-                   // console.log(rowsRacerList[1].name);  
+  
                 } else if (sheet.title.match(regexMatchSeason)) {
-                    // Get all the season specific data
-                    seasonList.push(sheet.title);
-                    return seasonList;
+       
+                    async function printSeasonRows() {
+                    // limit should be updated to be dynamic based on number of racers in racerList sheet. 
+                    // This will break if more than 13 racers added in a season    
+                    const rowsSeasonList = await sheet.getRows({limit: 13});
+
+                    await Promise.all(rowsSeasonList.map(async (row) => {
+
+                        let seasonRow = {
+                            rank: row.rank,
+                            name: row.name,
+                            points: row.points
+                        }
+
+                        seasonList.push ({
+                            [sheet.title]: seasonRow
+                        })
+                        
+                       // seasonList.push(row[sheet.title])
+                        console.log("HURR", seasonList)
+
+                    }))
+
+
+                }
+
+                printSeasonRows();
 
                 } else {
-                    console.log("Check the sheet names. This sheet either needs to be renamed or added into SeasonResults logic")
+                    console.log("Check the sheet names. This sheet either needs to be renamed or added into SeasonResults.js logic")
                 }
                
             }) 
+            console.log(sheetList)
 /*
             console.log("here", seasonList)
             const sheetRacerList = doc.sheetsByIndex[0];
@@ -124,7 +147,7 @@ const SeasonResults = (props) => {
          
             } 
             
-           updateSheetsArray(doc); */
+           updateSheetsArray(doc); 
             
 
 
@@ -184,12 +207,12 @@ const SeasonResults = (props) => {
                         }) 
                     
 
-                } */
+                } 
             }
           
             updateSeasonData(seasonList);
             
-
+*/
           }());
      
     }, [props.season]); 
