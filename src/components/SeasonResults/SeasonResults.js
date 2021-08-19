@@ -10,14 +10,11 @@ const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
 const doc = new GoogleSpreadsheet(spreadsheetID);
 doc.useApiKey(apiKey);
 
-// initialilize objects to hold racer and season stats from Google Sheets
-const statsRacers = [];
-
 const SeasonResults = (props) => {
-    const [racers, setRacers] = useState([]);
+    const [statsByRacer, setStatsByRacer] = useState([]);
     const [sheetList, setSheetList] = useState([]);
     const [seasonList, setSeason] = useState([]); // will be used to set options in season filter. Need to raise up state to Leaderboard.js
-    const [statsBySeason, setStatsBySeason] = useState([{season0: "loading"}]);
+    const [statsBySeason, setStatsBySeason] = useState({});
 
     useEffect(() => {
 
@@ -54,11 +51,11 @@ const SeasonResults = (props) => {
                                     participated: row.participated
                                     }
                             }
-                            // add each racers profile to the racers' state
-                            racers.push(newRacer)
+                            // add each racers profile to the statsByRacer state
+                            statsByRacer.push(newRacer)
                         }));
                         // set state now that array is updated
-                        setRacers(racers);
+                        setStatsByRacer(statsByRacer);
                       }
                       printRows()
   
@@ -103,31 +100,27 @@ const SeasonResults = (props) => {
                 }  
             }) 
           
+
           }());
      
-    }, [props.season, racers, statsBySeason]); 
+    }, [props.season, statsByRacer, statsBySeason]); 
 
 
     return (
         <tbody>
 
+            {
             
+            // want to add statsBySeason state data (grabbed from Google Sheet API using PrintSeasonRows() into table rows here
+            // statBySeason state takes a moment to update since PrintSeasonRows() is async. 
+            // This results in initial state being empty which means an error when attempting to access a child property to fill in table rows
+            console.log((statsBySeason && statsBySeason.season1))}
            { 
-        
-            statsBySeason.forEach( (season) => {
-                <tr>
-
-                    <td>{"hi"}</td>
+             /*statsByRacer.map( (racer) => (
+                <tr key={statsByRacer.id}>
+                    <td>{ statsByRacer.name }</td>
                 </tr>
-               
-            })
-        
-          
-          /* { racers.map( (racer) => (
-                <tr key={racer.id}>
-                    <td>{ racer.name }</td>
-                </tr>
-          )) } */ }
+          )) */ }
         
 
         </tbody>
