@@ -66,30 +66,23 @@ const SeasonResults = (props) => {
                         let seasonResults = [];
 
                         await Promise.all(rowsSeasonList.map(async (row) => {
-                        
+                            // Each row represents a racers results for that season
+                            // Save desired stats to an object
                             let seasonRowResults = {
                                 rank: row.rank,
                                 name: row.name,
                                 points: row.points
                             }
-
+                            // add each racer's results to an array for each season
                             seasonResults.push(seasonRowResults);
 
                         }))
-     
-                        // WORK IN PROGRESS. 
-                        // See https://stackoverflow.com/questions/61142159/convert-array-to-object-in-javascript
+
+                        // Use Lodash's merge() to deep copy the array of all the racer results objects into the statsBySeason object under their respective season
                         statsBySeason[sheet.title] = merge(seasonResults);
-                        console.log("HURR", statsBySeason);
-
-                        let racerResult = statsBySeason[sheet.title];
-
                         
-                            // racerResult.forEach( season => {
-                            //     console.log("Rank: ", season.rank, "Name: ", season.name);
-                            // })
+                        // Update state 
                         setStatsBySeason(statsBySeason);
-
                      }
 
                 printSeasonRows();
