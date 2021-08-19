@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'; 
 import axios from 'axios';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
+import merge from 'lodash/merge';
 
 const spreadsheetID = process.env.REACT_APP_GOOGLE_SPREADSHEET_ID;
 const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
@@ -11,13 +12,12 @@ doc.useApiKey(apiKey);
 
 // initialilize objects to hold racer and season stats from Google Sheets
 const statsRacers = [];
-const statsBySeason = [];
-
 
 const SeasonResults = (props) => {
     const [racers, setRacers] = useState([]);
     const [sheetList, setSheetList] = useState([]);
     const [seasonList, setSeason] = useState([]);
+    const [statsBySeason, setStatsBySeason] = useState({});
 
     useEffect(() => {
 
@@ -60,29 +60,35 @@ const SeasonResults = (props) => {
                 } else if (sheet.title.match(regexMatchSeason)) {
        
                     async function printSeasonRows() {
-                        // limit should be updated to be dynamic based on number of racers in racerList sheet. 
+                        // TODO: limit should be updated to be dynamic based on number of racers in racerList sheet. 
                         // This will break if more than 13 racers added in a season    
                         const rowsSeasonList = await sheet.getRows({limit: 13});
                         let seasonResults = [];
 
                         await Promise.all(rowsSeasonList.map(async (row) => {
                         
-                            
-
-                            let seasonRacerRow = {
+                            let seasonRowResults = {
                                 rank: row.rank,
                                 name: row.name,
                                 points: row.points
                             }
 
-                            seasonResults.push(seasonRacerRow);
-                            // seasonResults[sheet.title] = seasonRacerRow;
+                            seasonResults.push(seasonRowResults);
 
                         }))
+     
+                        // WORK IN PROGRESS. 
+                        // See https://stackoverflow.com/questions/61142159/convert-array-to-object-in-javascript
+                        statsBySeason[sheet.title] = merge(seasonResults);
+                        console.log("HURR", statsBySeason);
+
+                        let racerResult = statsBySeason[sheet.title];
+
                         
-                        seasonList.push(seasonResults);
-                        console.log("HURR", seasonList);
-            
+                            // racerResult.forEach( season => {
+                            //     console.log("Rank: ", season.rank, "Name: ", season.name);
+                            // })
+                        setStatsBySeason(statsBySeason);
 
                      }
 
@@ -93,7 +99,7 @@ const SeasonResults = (props) => {
                 }
                
             }) 
-            console.log(sheetList)
+          
 /*
             console.log("here", seasonList)
             const sheetRacerList = doc.sheetsByIndex[0];
