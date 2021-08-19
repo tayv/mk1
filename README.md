@@ -41,7 +41,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## Things to be aware of
 
-If you add a racer to the list you should update the limit number in the printSeasonRows()   
+1. If you add a racer to the list you should update the limit number in the printSeasonRows()   
 
 ```
 const rowsSeasonList = await sheet.getRows({limit: 13});
@@ -49,5 +49,7 @@ const rowsSeasonList = await sheet.getRows({limit: 13});
 
 This will be made dynamic in the future but for now it's hardcoded in to prevent grabbing additional blank rows in the seasonX sheets.
 
+
+2. Each season should be its own sheet (copy previous season to use as template) and should follow the `seasonX` naming convention. The SeasonResults.js component makes use of regex in its logic that depends on this.
 
 
