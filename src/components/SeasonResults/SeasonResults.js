@@ -25,6 +25,7 @@ const SeasonResults = (props) => {
             // get an array of all sheets as objects 
             const sheetsAll = doc.sheetsByIndex;
 
+            // Loop through each sheet and update racerList or statsBySeason depending on sheet title
             sheetsAll.forEach((sheet) => {       
 
                 // Regex used to check if sheet name contains string "season"
@@ -77,7 +78,8 @@ const SeasonResults = (props) => {
                             let seasonRowResults = {
                                 rank: row.rank,
                                 name: row.name,
-                                points: row.points
+                                points: row.points,
+                                change: row.change
                             }
                             // add each racer's results to an array for each season
                             seasonResults.push(seasonRowResults);
@@ -99,7 +101,6 @@ const SeasonResults = (props) => {
                     console.log("Check the sheet names. This sheet either needs to be renamed or added into SeasonResults.js logic")
                 }  
             }) 
-          
 
           }());
      
@@ -108,21 +109,23 @@ const SeasonResults = (props) => {
 
     return (
         <tbody>
-
             {
-            
-            // want to add statsBySeason state data (grabbed from Google Sheet API using PrintSeasonRows() into table rows here
-            // statBySeason state takes a moment to update since PrintSeasonRows() is async. 
-            // This results in initial state being empty which means an error when attempting to access a child property to fill in table rows
-            console.log((statsBySeason && statsBySeason.season1))}
-           { 
-             /*statsByRacer.map( (racer) => (
-                <tr key={statsByRacer.id}>
-                    <td>{ statsByRacer.name }</td>
-                </tr>
-          )) */ }
-        
-
+                // want to add statsBySeason state data (grabbed from Google Sheet API using PrintSeasonRows() into table rows here
+                // Use a ternary since statBySeason state takes a moment to update as PrintSeasonRows() is async. 
+                // This results in initial state being empty which means an error when attempting to access a child property to fill in table rows  
+                // PROBLEM: The data is not updating until user switches filter. Want it to populate as soon as data available
+                !statsBySeason.[props.season] ? <tr /> : (
+                 
+                    statsBySeason.[props.season].map( (row) => (
+                        <tr key={ row.rank }>
+                            <td>{ row.rank }</td>
+                            <td>{ row.name }</td>
+                            <td>{ row.points }</td>
+                            <td>{ row.change }</td>
+                        </tr>
+                    ))
+                ) 
+            }
         </tbody>
     )
 }
