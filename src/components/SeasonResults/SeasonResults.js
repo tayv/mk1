@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'; 
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import merge from 'lodash/merge';
+import useDeepCompareWithRef from '../DeepCompare';
 
 const spreadsheetID = process.env.REACT_APP_GOOGLE_SPREADSHEET_ID;
 const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
@@ -11,11 +12,10 @@ doc.useApiKey(apiKey);
 
 const SeasonResults = (props) => {
     const [statsByRacer, setStatsByRacer] = useState([]);
-   // const [seasonList, setSeason] = useState([]); // will be used to set options in season filter. Need to raise up state to Leaderboard.js
     const [statsBySeason, setStatsBySeason] = useState({});
 
     useEffect(() => {
-        console.log("render", statsBySeason);
+        console.log("This is the value of statsBySeason at render:", statsBySeason);
 
         (async function() {
             // load the google sheet 
@@ -32,7 +32,7 @@ const SeasonResults = (props) => {
 
                 if (sheet.title === "racerList") {
                     // If we're on the racerList sheet then grab all the row data and add it to statsByRacer
-                    async function printRows() {
+                    async function getRacerRows() {
 
                         // Get all the active rows for this sheet
                         const rowsRacerList = await sheet.getRows();
@@ -57,12 +57,12 @@ const SeasonResults = (props) => {
                         // set state now that array is updated. This should trigger update to the table
                         setStatsByRacer(statsByRacer);
                       }
-                      printRows()
+                      getRacerRows()
   
                 } else if (sheet.title.match(regexMatchSeason)) {
 
                     // If we're on a sheet starting with "season" then get each row and deep copy it into the statsBySeason object
-                    async function printSeasonRows() {
+                    async function getSeasonRows() {
 
                         // TODO: limit should be updated to be dynamic based on number of racers in racerList sheet. 
                         // This will break if more than 13 racers added in a season    
@@ -90,9 +90,10 @@ const SeasonResults = (props) => {
                         
                         // Update state 
                         setStatsBySeason(statsBySeason);
+                        console.log("Just updated the statsBySeason using setstate() inside useEffect()", statsBySeason)
                      }
 
-                     printSeasonRows();
+                     getSeasonRows();
 
                 } else {
 
@@ -102,9 +103,10 @@ const SeasonResults = (props) => {
             }) 
 
           }());
-     
-    }, [props.season, statsByRacer, statsBySeason]); 
 
+        // USING deepcompare so useEffect can detect change in object. 
+        // See https://betterprogramming.pub/tips-for-using-reacts-useeffect-effectively-dfe6ae951421
+    }, [props.season, statsByRacer, useDeepCompareWithRef(statsBySeason)]); 
 
     return (
         <tbody>
