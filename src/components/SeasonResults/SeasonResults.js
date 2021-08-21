@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'; 
-import axios from 'axios';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import merge from 'lodash/merge';
 
@@ -12,11 +11,11 @@ doc.useApiKey(apiKey);
 
 const SeasonResults = (props) => {
     const [statsByRacer, setStatsByRacer] = useState([]);
-    const [sheetList, setSheetList] = useState([]);
-    const [seasonList, setSeason] = useState([]); // will be used to set options in season filter. Need to raise up state to Leaderboard.js
+   // const [seasonList, setSeason] = useState([]); // will be used to set options in season filter. Need to raise up state to Leaderboard.js
     const [statsBySeason, setStatsBySeason] = useState({});
 
     useEffect(() => {
+        console.log("render", statsBySeason);
 
         (async function() {
             // load the google sheet 
@@ -32,7 +31,7 @@ const SeasonResults = (props) => {
                 const regexMatchSeason = /season/mg;
 
                 if (sheet.title === "racerList") {
-                    // If we're on the racerList sheet then grab all the row data
+                    // If we're on the racerList sheet then grab all the row data and add it to statsByRacer
                     async function printRows() {
 
                         // Get all the active rows for this sheet
@@ -55,7 +54,7 @@ const SeasonResults = (props) => {
                             // add each racers profile to the statsByRacer state
                             statsByRacer.push(newRacer)
                         }));
-                        // set state now that array is updated
+                        // set state now that array is updated. This should trigger update to the table
                         setStatsByRacer(statsByRacer);
                       }
                       printRows()
@@ -113,7 +112,7 @@ const SeasonResults = (props) => {
                 // want to add statsBySeason state data (grabbed from Google Sheet API using PrintSeasonRows() into table rows here
                 // Use a ternary since statBySeason state takes a moment to update as PrintSeasonRows() is async. 
                 // This results in initial state being empty which means an error when attempting to access a child property to fill in table rows  
-                // PROBLEM: The data is not updating until user switches filter. Want it to populate as soon as data available
+                // PROBLEM: The data is not updating until user switches filter. Want it to populate as soon as data available/state updated
                 !statsBySeason.[props.season] ? <tr /> : (
                  
                     statsBySeason.[props.season].map( (row) => (
