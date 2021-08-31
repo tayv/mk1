@@ -5,6 +5,7 @@ import SeasonResults from '../SeasonResults/SeasonResults.js';
 import SeasonFilter from '../SeasonFilter/SeasonFilter.js';
   
 const Leaderboard = () => {
+    // Default to latest season so most likely to load relevant results
     const [season, setSeason] = useState("season2");
 
     const onSeasonFilterChange = (value) => {
@@ -19,7 +20,7 @@ const Leaderboard = () => {
                 <thead>
                     <tr>
                         <th></th>
-                        <th colSpan="2">Racer</th>
+                        <th>Racer</th>
                         <th>Points</th>
                         <th>Change</th>
                     </tr>
