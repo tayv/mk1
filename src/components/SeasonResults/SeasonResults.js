@@ -59,11 +59,15 @@ const SeasonResults = (props) => {
             } else if (sheet.title.match(regexMatchSeason)) {
 
                 // If we're on a sheet starting with "season" then get each row and deep copy it into the statsBySeason object
-                async function getSeasonRows() {
+                async function fetchSeasonRows() {
 
                     // TODO: limit should be updated to be dynamic based on number of racers in racerList sheet. 
-                    // This will break if more than 13 racers added in a season    
+                    // This will break if more than 12 racers added in a season    
                     const rowsSeasonList = await sheet.getRows({limit: 13});
+
+                    setRowsBySeason(rowsSeasonList);
+
+                    // Initialize array to hold each season's row
                     let seasonResults = [];
 
                     // Promise.all groups promises together in an iterable array and prevents race conditions
@@ -71,29 +75,27 @@ const SeasonResults = (props) => {
 
                         // Each row represents a racers results for that season
                         // Save desired stats to an object
-                        let seasonRowResults = {
+                        let seasonRowResult = {
                             rank: row.rank,
                             name: row.name,
                             points: row.points,
                             change: row.change
                         }
-                        // add each racer's results to an array for each season
-                        seasonResults.push(seasonRowResults);
+                        // add each racer's results to the array 
+                        return seasonResults = [...seasonResults, seasonRowResult]
 
                     }))
 
                     // Use Lodash's merge() to deep copy the array of all the racer results objects into the statsBySeason object under their respective season
-                    //statsBySeason[sheet.title] = merge(seasonResults);
-                    
-                    // Need a copy so don't mutate state
+                    // Save to a copy so don't mutate state
                     let statsBySeasonCopy = statsBySeason[sheet.title] = merge(seasonResults);
 
                     // Update state 
                     setStatsBySeason(statsBySeasonCopy);
                  }
 
-                 getSeasonRows();
-
+                 fetchSeasonRows();
+                
             } else {
 
                 // Something went wrong. Likely a new sheet was added that didn't follow naming convention of "racerList" or starting with "season"
@@ -187,7 +189,7 @@ const SeasonResults = (props) => {
     //             } else if (sheet.title.match(regexMatchSeason)) {
 
     //                 // If we're on a sheet starting with "season" then get each row and deep copy it into the statsBySeason object
-    //                 async function getSeasonRows() {
+    //                 async function fetchSeasonRows() {
 
     //                     // TODO: limit should be updated to be dynamic based on number of racers in racerList sheet. 
     //                     // This will break if more than 13 racers added in a season    
@@ -221,7 +223,7 @@ const SeasonResults = (props) => {
     //                     console.log("Just updated the statsBySeason using setstate() inside useEffect()", statsBySeason)
     //                  }
 
-    //                  getSeasonRows();
+    //                  fetchSeasonRows();
 
     //             } else {
 
