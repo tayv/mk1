@@ -11,7 +11,7 @@ doc.useApiKey(apiKey);
 
 const SeasonResults = (props) => {
     const [sheetsAll, setSheetData] = useState([]);
-    const [statsByRacer, setStatsByRacer] = useState([]);
+    const [statsByRacer, setStatsByRacer] = useState([]); // Stats by racer will eventually be used to display alltime results
     const [rowsRacerList, setRowsRacerList] = useState([]);
     const [statsBySeason, setStatsBySeason] = useState({});
 
@@ -101,7 +101,7 @@ const SeasonResults = (props) => {
       
         fetchRowData();
 
-      }, [sheetsAll]); // updates when sheetsAll state updates
+      }, [sheetsAll, statsBySeason]); // updates when sheetsAll state updates
 
 
     useEffect(() => {
