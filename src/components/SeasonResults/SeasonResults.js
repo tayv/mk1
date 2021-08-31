@@ -113,10 +113,9 @@ const SeasonResults = (props) => {
       }, [sheetsAll]); // updates when sheetsAll state updates
 
     useEffect(() => {
-       // console.log("rowwws", rowsRacerList)
         let racerList = [];
-
-        rowsRacerList.map((row) => {
+       // console.log("rowwws", rowsRacerList)
+        racerList = rowsRacerList.map((row) => {
             let newRacer = {
                 id: row.id,
                 avatar: row.avatar,
@@ -127,13 +126,13 @@ const SeasonResults = (props) => {
                 }
             
             }
-            racerList = [...racerList, newRacer]
-
-            return racerList;
+            
+            return [...racerList, newRacer]
             
         })
+        
         setStatsByRacer(racerList);
-        console.log("here",racerList)
+        console.log("racerList: ",racerList)
         // Cannot use forEach() with promises. Need to use Promise.all with map() to get an array of promises
         // See https://stackoverflow.com/questions/37576685/using-async-await-with-a-foreach-loop
         // const rowPromises = async () => {
