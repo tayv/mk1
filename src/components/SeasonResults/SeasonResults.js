@@ -72,7 +72,6 @@ const SeasonResults = (props) => {
 
                     // Promise.all groups promises together in an iterable array and prevents race conditions
                     await Promise.all(rowsSeasonList.map(async (row) => {
-
                         // Each row represents a racers results for that season
                         // Save desired stats to an object
                         let seasonRowResult = {
@@ -82,16 +81,16 @@ const SeasonResults = (props) => {
                             change: row.change
                         }
                         // add each racer's results to the array 
-                        return seasonResults = [...seasonResults, seasonRowResult]
+                        return seasonResults = [...seasonResults, seasonRowResult], console.log(seasonResults)
 
                     }))
 
                     // Use Lodash's merge() to deep copy the array of all the racer results objects into the statsBySeason object under their respective season
                     // Save to a copy so don't mutate state
-                    let statsBySeasonCopy = statsBySeason[sheet.title] = merge(seasonResults);
-
+                    statsBySeason[sheet.title] = merge(seasonResults);
+                   // console.log("statsbySeasonCopy", statsBySeason[sheet.title])
                     // Update state 
-                    setStatsBySeason(statsBySeasonCopy);
+                    setStatsBySeason(statsBySeason);
                  }
 
                  fetchSeasonRows();
@@ -110,6 +109,7 @@ const SeasonResults = (props) => {
         fetchRowData();
 
       }, [sheetsAll]); // updates when sheetsAll state updates
+
 
     useEffect(() => {
         // Return an array of all the racers and their overall stats from the racerList sheet
@@ -134,109 +134,6 @@ const SeasonResults = (props) => {
                    
     }, [rowsRacerList]) // Trigger useEffect when the rowsRacerList state updates
 
-
-    // useEffect(() => {
-    //     console.log("This is the value of statsBySeason at render:", statsBySeason);
-
-    //     (async function() {
-    //         // load the google sheet 
-    //     //    await doc.loadInfo();
-        
-    //         // get an array of all sheets as objects 
-    //      //   const sheetsAll = doc.sheetsByIndex;
-
-    //         // Loop through each sheet and update racerList or statsBySeason depending on sheet title
-    //         sheetsAll.forEach((sheet) => {       
-
-    //             // Regex used to check if sheet name contains string "season"
-    //             const regexMatchSeason = /season/mg;
-
-    //             if (sheet.title === "racerList") {
-    //                 // If we're on the racerList sheet then grab all the row data and add it to statsByRacer
-    //                 async function fetchSeasonRows() {
-
-    //                     // Get all the active rows for this sheet
-    //                     const rowsRacerList = await sheet.getRows();
-
-    //                     // Cannot use forEach() with promises. Need to use Promise.all with map() to get an array of promises
-    //                     // See https://stackoverflow.com/questions/37576685/using-async-await-with-a-foreach-loop
-    //                     let statsByRacerCopy
-    //                     await Promise.all(rowsRacerList.map(async (row) => {
-
-    //                         // Each racer will have an object referencing their overall stats
-    //                         let newRacer = {
-    //                             id: row.id,
-    //                             avatar: row.avatar,
-    //                             name: row.name,
-    //                             allTime: {
-    //                                 championships: row.championships,
-    //                                 participated: row.participated
-    //                                 }
-    //                         }
-    //                         // add each racers profile to the statsByRacer state
-    //                       //  statsByRacer.push(newRacer)
-
-    //                          statsByRacerCopy = [...statsByRacer, newRacer];
-    //                         console.log("Orignial:", statsByRacer, "Copy", statsByRacerCopy, "loop",newRacer);
-                           
-
-    //                     }));
-    //                     // set state now that array is updated. This should trigger update to the table
-                        
-    //                   }
-    //                   fetchSeasonRows()
-  
-    //             } else if (sheet.title.match(regexMatchSeason)) {
-
-    //                 // If we're on a sheet starting with "season" then get each row and deep copy it into the statsBySeason object
-    //                 async function fetchSeasonRows() {
-
-    //                     // TODO: limit should be updated to be dynamic based on number of racers in racerList sheet. 
-    //                     // This will break if more than 13 racers added in a season    
-    //                     const rowsSeasonList = await sheet.getRows({limit: 13});
-    //                     let seasonResults = [];
-
-    //                     // Promise.all groups promises together in an iterable array and prevents race conditions
-    //                     await Promise.all(rowsSeasonList.map(async (row) => {
-
-    //                         // Each row represents a racers results for that season
-    //                         // Save desired stats to an object
-    //                         let seasonRowResults = {
-    //                             rank: row.rank,
-    //                             name: row.name,
-    //                             points: row.points,
-    //                             change: row.change
-    //                         }
-    //                         // add each racer's results to an array for each season
-    //                         seasonResults.push(seasonRowResults);
-
-    //                     }))
-
-    //                     // Use Lodash's merge() to deep copy the array of all the racer results objects into the statsBySeason object under their respective season
-    //                     //statsBySeason[sheet.title] = merge(seasonResults);
-                        
-    //                     // Need a copy so don't mutate state
-    //                     let statsBySeasonCopy = statsBySeason[sheet.title] = merge(seasonResults);
-
-    //                     // Update state 
-    //                     setStatsBySeason(statsBySeasonCopy);
-    //                     console.log("Just updated the statsBySeason using setstate() inside useEffect()", statsBySeason)
-    //                  }
-
-    //                  fetchSeasonRows();
-
-    //             } else {
-
-    //                 // Something went wrong. Likely a new sheet was added that didn't follow naming convention of "racerList" or starting with "season"
-    //                 console.log("Check the sheet names. This sheet either needs to be renamed or added into SeasonResults.js logic")
-    //             }  
-    //         }) 
-
-    //       }());
-
-    //     // USING deepcompare so useEffect can detect change in object. 
-    //     // See https://betterprogramming.pub/tips-for-using-reacts-useeffect-effectively-dfe6ae951421
-    // }, [props.season, statsByRacer]); 
 
     return (
         <tbody>
