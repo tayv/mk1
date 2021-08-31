@@ -44,7 +44,7 @@ const SeasonResults = (props) => {
 
             if (sheet.title === "racerList") {
                 // If we're on the racerList sheet then grab all the row data and save it in state so we can work with it 
-                async function fetchSeasonRows() {
+                async function fetchRacerListRows() {
 
                     // Get all the active rows for this sheet
                     const rowsRacerList = await sheet.getRows();
@@ -53,7 +53,7 @@ const SeasonResults = (props) => {
                     setRowsRacerList(rowsRacerList);   
                 }
 
-                  fetchSeasonRows()
+                  fetchRacerListRows()
                  
 
             } else if (sheet.title.match(regexMatchSeason)) {
@@ -64,7 +64,6 @@ const SeasonResults = (props) => {
                     // TODO: limit should be updated to be dynamic based on number of racers in racerList sheet. 
                     // This will break if more than 13 racers added in a season    
                     const rowsSeasonList = await sheet.getRows({limit: 13});
-                    console.log("asdfasdf", rowsSeasonList)
                     let seasonResults = [];
 
                     // Promise.all groups promises together in an iterable array and prevents race conditions
@@ -91,7 +90,6 @@ const SeasonResults = (props) => {
 
                     // Update state 
                     setStatsBySeason(statsBySeasonCopy);
-                    console.log("Just updated the statsBySeason using setstate() inside useEffect()", statsBySeason)
                  }
 
                  getSeasonRows();
@@ -101,7 +99,6 @@ const SeasonResults = (props) => {
                 // Something went wrong. Likely a new sheet was added that didn't follow naming convention of "racerList" or starting with "season"
                 console.log("Check the sheet names. This sheet either needs to be renamed or added into SeasonResults.js logic")
             }   
-              console.log(sheet.title);
 
            })
 
@@ -113,8 +110,9 @@ const SeasonResults = (props) => {
       }, [sheetsAll]); // updates when sheetsAll state updates
 
     useEffect(() => {
+        // Return an array of all the racers and their overall stats from the racerList sheet
         let racerList = [];
-       // console.log("rowwws", rowsRacerList)
+
         racerList = rowsRacerList.map((row) => {
             let newRacer = {
                 id: row.id,
@@ -124,41 +122,13 @@ const SeasonResults = (props) => {
                     championships: row.championships,
                     participated: row.participated
                 }
-            
             }
             
             return [...racerList, newRacer]
             
         })
         
-        setStatsByRacer(racerList);
-        console.log("racerList: ",racerList)
-        // Cannot use forEach() with promises. Need to use Promise.all with map() to get an array of promises
-        // See https://stackoverflow.com/questions/37576685/using-async-await-with-a-foreach-loop
-        // const rowPromises = async () => {
-        //     let statsAllRacers = [];
-        //     await Promise.all(rowsRacerList.map(async (row) => {
-
-        //         // Each racer will have an object referencing their overall stats
-        //         let newRacer = {
-        //             id: row.id,
-        //             avatar: row.avatar,
-        //             name: row.name,
-        //             allTime: {
-        //                 championships: row.championships,
-        //                 participated: row.participated
-        //             }
-        //         }
-        //         // add each racers profile to the statsByRacer state
-        //         statsAllRacers.push(newRacer)
-
-        //     }));
-        //     console.log("Orignial:", "total", statsAllRacers);
-        //     setStatsByRacer(statsAllRacers);
-        // }
-
-        // rowPromises()
-                    
+        setStatsByRacer(racerList);                    
                    
     }, [rowsRacerList]) // Trigger useEffect when the rowsRacerList state updates
 
