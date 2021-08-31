@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'; 
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import merge from 'lodash/merge';
-import useDeepCompareWithRef from '../DeepCompare';
 
 const spreadsheetID = process.env.REACT_APP_GOOGLE_SPREADSHEET_ID;
 const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
@@ -12,7 +11,6 @@ doc.useApiKey(apiKey);
 
 const SeasonResults = (props) => {
     const [sheetsAll, setSheetData] = useState([]);
-    const [rowsBySeason, setRowsBySeason] = useState([]);
     const [statsByRacer, setStatsByRacer] = useState([]);
     const [rowsRacerList, setRowsRacerList] = useState([]);
     const [statsBySeason, setStatsBySeason] = useState({});
@@ -65,8 +63,6 @@ const SeasonResults = (props) => {
                     // This will break if more than 12 racers added in a season    
                     const rowsSeasonList = await sheet.getRows({limit: 13});
 
-                    setRowsBySeason(rowsSeasonList);
-
                     // Initialize array to hold each season's row
                     let seasonResults = [];
 
@@ -81,14 +77,13 @@ const SeasonResults = (props) => {
                             change: row.change
                         }
                         // add each racer's results to the array 
-                        return seasonResults = [...seasonResults, seasonRowResult], console.log(seasonResults)
+                        return seasonResults = [...seasonResults, seasonRowResult]
 
                     }))
 
                     // Use Lodash's merge() to deep copy the array of all the racer results objects into the statsBySeason object under their respective season
-                    // Save to a copy so don't mutate state
+                    // Assign the row results to the correct season
                     statsBySeason[sheet.title] = merge(seasonResults);
-                   // console.log("statsbySeasonCopy", statsBySeason[sheet.title])
                     // Update state 
                     setStatsBySeason(statsBySeason);
                  }
@@ -102,8 +97,6 @@ const SeasonResults = (props) => {
             }   
 
            })
-
-          // setRowsBySheet(sheetsAllCopy);
         }
       
         fetchRowData();
