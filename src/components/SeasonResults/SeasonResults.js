@@ -122,28 +122,40 @@ const SeasonResults = (props) => {
             return [...allTimeList, newRacer]
             
         })
-        
-        setStatsAllTime(allTimeList);                    
+
+        const flattened = [].concat(...allTimeList);
+
+        setStatsAllTime(flattened);                    
                    
     }, [rowsAllTime]) // Trigger useEffect when the rowsAllTime state updates
 
-
+    
     return (
         <tbody>
             {
                 // want to add statsBySeason state data (grabbed from Google Sheet API using PrintSeasonRows() into table rows here
-                // Use a ternary since statBySeason state takes a moment to update as PrintSeasonRows() is async. 
-                // Without it there will be an error trying to access child property of undefined since initial state is empty 
+                // Use a ternary since statBySeason state takes a moment to update as PrintSeasonRows() is async to avoid errors accessing undefined child property. 
                 !statsBySeason.[props.season] ? <tr /> : (
                  
-                    statsBySeason.[props.season].map( (row) => (
-                        <tr key={ row.rank }>
-                            <td>{ row.rank }</td>
-                            <td>{ row.name }</td>
-                            <td>{ row.points }</td>
-                            <td>{ row.change }</td>
-                        </tr>
-                    ))
+                    props.season == "allTime" ? (
+                        statsBySeason.[props.season].map( (row) => (
+                            <tr key={ row.rank }>
+                                <td>{ row.rank }</td>
+                                <td>{ row.name }</td>
+                                <td>{ row.points }</td>
+                                <td>{ row.change }</td>
+                            </tr>
+                        ))
+                    ) : (
+                        statsAllTime.map( (row) => (
+                            <tr key={ row.id }>
+                                <td>{ row.avatar }</td>
+                                <td>{ row.name }</td>
+                                <td>{ row.allTime.championships }</td>
+                                <td>{ row.allTime.gold }</td>
+                            </tr>
+                        ))
+                    )
                 ) 
             }
         </tbody>
