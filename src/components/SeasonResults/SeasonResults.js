@@ -11,8 +11,8 @@ doc.useApiKey(apiKey);
 
 const SeasonResults = (props) => {
     const [sheetsAll, setSheetData] = useState([]);
-    const [statsByRacer, setStatsByRacer] = useState([]); // Stats by racer will eventually be used to display alltime results
-    const [rowsRacerList, setRowsRacerList] = useState([]);
+    const [statsAllTime, setStatsAllTime] = useState([]); // allTime stats by racer used to display alltime results
+    const [rowsAllTime, setRowsAllTime] = useState([]);
     const [statsBySeason, setStatsBySeason] = useState({});
 
     
@@ -40,15 +40,15 @@ const SeasonResults = (props) => {
             // Regex used to check if sheet name contains string "season" so we can get rows from the right sheet
             const regexMatchSeason = /season/mg;
 
-            if (sheet.title === "racerList") {
-                // If we're on the racerList sheet then grab all the row data and save it in state so we can work with it 
+            if (sheet.title === "allTime") {
+                // If we're on the allTime sheet then grab all the row data and save it in state so we can work with it 
                 async function fetchRacerListRows() {
 
                     // Get all the active rows for this sheet
-                    const rowsRacerList = await sheet.getRows();
+                    const rowsAllTime = await sheet.getRows();
 
                     // save the data to state so we can trigger other useEfects
-                    setRowsRacerList(rowsRacerList);   
+                    setRowsAllTime(rowsAllTime);   
                 }
 
                   fetchRacerListRows()
@@ -59,7 +59,7 @@ const SeasonResults = (props) => {
                 // If we're on a sheet starting with "season" then get each row and deep copy it into the statsBySeason object
                 async function fetchSeasonRows() {
 
-                    // TODO: limit should be updated to be dynamic based on number of racers in racerList sheet. 
+                    // TODO: limit should be updated to be dynamic based on number of racers in allTime sheet. 
                     // This will break if more than 12 racers added in a season    
                     const rowsSeasonList = await sheet.getRows({limit: 13});
 
@@ -92,7 +92,7 @@ const SeasonResults = (props) => {
                 
             } else {
 
-                // Something went wrong. Likely a new sheet was added that didn't follow naming convention of "racerList" or starting with "season"
+                // Something went wrong. Likely a new sheet was added that didn't follow naming convention of "allTime" or starting with "season"
                 console.log("Check the sheet names. This sheet either needs to be renamed or added into SeasonResults.js logic")
             }   
 
@@ -105,10 +105,10 @@ const SeasonResults = (props) => {
 
 
     useEffect(() => {
-        // Return an array of all the racers and their overall stats from the racerList sheet
-        let racerList = [];
+        // Return an array of all the racers and their overall stats from the allTime sheet
+        let allTimeList = [];
 
-        racerList = rowsRacerList.map((row) => {
+        allTimeList = rowsAllTime.map((row) => {
             let newRacer = {
                 id: row.id,
                 avatar: row.avatar,
@@ -119,13 +119,13 @@ const SeasonResults = (props) => {
                 }
             }
             
-            return [...racerList, newRacer]
+            return [...allTimeList, newRacer]
             
         })
         
-        setStatsByRacer(racerList);                    
+        setStatsAllTime(allTimeList);                    
                    
-    }, [rowsRacerList]) // Trigger useEffect when the rowsRacerList state updates
+    }, [rowsAllTime]) // Trigger useEffect when the rowsAllTime state updates
 
 
     return (
@@ -133,8 +133,7 @@ const SeasonResults = (props) => {
             {
                 // want to add statsBySeason state data (grabbed from Google Sheet API using PrintSeasonRows() into table rows here
                 // Use a ternary since statBySeason state takes a moment to update as PrintSeasonRows() is async. 
-                // This results in initial state being empty which means an error when attempting to access a child property to fill in table rows  
-                // PROBLEM: The data is not updating until user switches filter. Want it to populate as soon as data available/state updated
+                // Without it there will be an error trying to access child property of undefined since initial state is empty 
                 !statsBySeason.[props.season] ? <tr /> : (
                  
                     statsBySeason.[props.season].map( (row) => (
