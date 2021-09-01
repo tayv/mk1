@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import merge from 'lodash/merge';
 
+import PrintSeasonData from './PrintSeasonData';
+
 const spreadsheetID = process.env.REACT_APP_GOOGLE_SPREADSHEET_ID;
 const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
 
@@ -129,7 +131,6 @@ const SeasonResults = (props) => {
                    
     }, [rowsAllTime]) // Trigger useEffect when the rowsAllTime state updates
 
-    
     return (
         <tbody>
             {
@@ -137,15 +138,8 @@ const SeasonResults = (props) => {
                 // Use a ternary since statBySeason state takes a moment to update as PrintSeasonRows() is async to avoid errors accessing undefined child property. 
                 !statsBySeason.[props.season] ? <tr /> : (
                  
-                    props.season == "allTime" ? (
-                        statsBySeason.[props.season].map( (row) => (
-                            <tr key={ row.rank }>
-                                <td>{ row.rank }</td>
-                                <td>{ row.name }</td>
-                                <td>{ row.points }</td>
-                                <td>{ row.change }</td>
-                            </tr>
-                        ))
+                    props.season !== "allTime" ? (
+                        <PrintSeasonData season={props.season} statsBySeason={statsBySeason} />
                     ) : (
                         statsAllTime.map( (row) => (
                             <tr key={ row.id }>
