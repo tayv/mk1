@@ -16,16 +16,33 @@ const Leaderboard = () => {
         <div className="Leaderboard-container">
             <SeasonFilter value={season} onChange={onSeasonFilterChange}/>
         <div>
-            <table>
+             <table>
                 <thead>
-                    <tr>
-                        <th></th>
-                        <th>Racer</th>
-                        <th>Points</th>
-                        <th>Change</th>
-                    </tr>
+                    {
+                        (function () {
+                            if (season === "allTime") {
+                            return (
+                                <tr>
+                                    <th></th>
+                                    <th>Racer</th>
+                                    <th>Championships</th>
+                                    <th>Golds</th>
+                                </tr>
+                            ) 
+                            } else {
+                                return (
+                                    <tr>
+                                        <th></th>
+                                        <th>Racer</th>
+                                        <th>Points</th>
+                                        <th>Change</th>
+                                    </tr>        
+                                )
+                            }
+                        })()
+                    }
                 </thead>
-                    <SeasonResults season={season} />
+                <SeasonResults season={season} />
             </table>
         </div>
 
