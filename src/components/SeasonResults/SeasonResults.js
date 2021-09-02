@@ -3,6 +3,7 @@ import { GoogleSpreadsheet } from 'google-spreadsheet';
 import merge from 'lodash/merge';
 
 import PrintSeasonData from './PrintSeasonData';
+import PrintAllTimeData from './PrintAllTimeData';
 
 const spreadsheetID = process.env.REACT_APP_GOOGLE_SPREADSHEET_ID;
 const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
@@ -134,23 +135,22 @@ const SeasonResults = (props) => {
     return (
         <tbody>
             {
-                // want to add statsBySeason state data (grabbed from Google Sheet API using PrintSeasonRows() into table rows here
-                // Use a ternary since statBySeason state takes a moment to update as PrintSeasonRows() is async to avoid errors accessing undefined child property. 
-                !statsBySeason.[props.season] ? <tr /> : (
-                 
-                    props.season !== "allTime" ? (
-                        <PrintSeasonData season={props.season} statsBySeason={statsBySeason} />
-                    ) : (
-                        statsAllTime.map( (row) => (
-                            <tr key={ row.id }>
-                                <td>{ row.avatar }</td>
-                                <td>{ row.name }</td>
-                                <td>{ row.allTime.championships }</td>
-                                <td>{ row.allTime.gold }</td>
-                            </tr>
-                        ))
-                    )
-                ) 
+                // Add season or allTime state data (grabbed from Google Sheet API using PrintSeasonRows() into table rows here
+                (function () {
+
+                    switch (props.season) {
+                        case "allTime":
+                            return <PrintAllTimeData statsAllTime={statsAllTime} />;
+                            break;
+
+                        // NOTE THIS IS HARD CODED FOR TESTING
+                        case ("season1"):
+                            return <PrintSeasonData season={props.season} statsBySeason={statsBySeason} />;
+                            break;
+                        default:
+                            return null;
+                    }
+                })()
             }
         </tbody>
     )
