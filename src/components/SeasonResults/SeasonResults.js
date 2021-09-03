@@ -138,18 +138,12 @@ const SeasonResults = (props) => {
                 // Add season or allTime state data (grabbed from Google Sheet API using PrintSeasonRows() into table rows here
                 (function () {
 
-                    switch (props.season) {
-                        case "allTime":
-                            return <PrintAllTimeData statsAllTime={statsAllTime} />;
-                            break;
-
-                        // NOTE THIS IS HARD CODED FOR TESTING
-                        case ("season1"):
-                            return <PrintSeasonData season={props.season} statsBySeason={statsBySeason} />;
-                            break;
-                        default:
-                            return null;
+                    if (props.season === "allTime") {
+                            return <PrintAllTimeData statsAllTime={statsAllTime} />; 
+                    } else {
+                        return <PrintSeasonData season={props.season} statsBySeason={statsBySeason} />;
                     }
+                     
                 })()
             }
         </tbody>
