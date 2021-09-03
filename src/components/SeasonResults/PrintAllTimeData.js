@@ -3,8 +3,7 @@ import React from 'react';
 const PrintAllTimeData = (props) => {
 
     const statsAllTimeProp = props.statsAllTime;
-    console.log(props)
-
+    
     return (
 
         statsAllTimeProp.map( (row) => (

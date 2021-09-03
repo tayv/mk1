@@ -138,10 +138,10 @@ const SeasonResults = (props) => {
                 // Add season or allTime state data (grabbed from Google Sheet API using PrintSeasonRows() into table rows here
                 (function () {
 
-                    if (props.season === "allTime") {
-                            return <PrintAllTimeData statsAllTime={statsAllTime} />; 
+                    if (props.season !== "allTime") {
+                            return  <PrintSeasonData season={props.season} statsBySeason={statsBySeason} />;
                     } else {
-                        return <PrintSeasonData season={props.season} statsBySeason={statsBySeason} />;
+                        return <PrintAllTimeData statsAllTime={statsAllTime} />;
                     }
                      
                 })()
