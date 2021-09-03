@@ -117,8 +117,12 @@ const SeasonResults = (props) => {
                 avatar: row.avatar,
                 name: row.name,
                 allTime: {
+                    participated: row.participated,
                     championships: row.championships,
-                    participated: row.participated
+                    gold: row.gold,
+                    silver: row.silver,
+                    bronze: row.bronze,
+                    timeTrial: row.timeTrial,
                 }
             }
             

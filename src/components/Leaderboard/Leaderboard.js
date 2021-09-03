@@ -25,8 +25,11 @@ const Leaderboard = () => {
                                 <tr>
                                     <th></th>
                                     <th>Racer</th>
-                                    <th>Championships</th>
-                                    <th>Golds</th>
+                                    <th>Championship</th>
+                                    <th>Gold</th>
+                                    <th>Silver</th>
+                                    <th>Bronze</th>
+                                    <th>Time Trial</th>
                                 </tr>
                             ) 
                             } else {
