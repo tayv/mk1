@@ -17,6 +17,7 @@ const SeasonResults = (props) => {
     const [statsAllTime, setStatsAllTime] = useState([]); // allTime stats by racer used to display alltime results
     const [rowsAllTime, setRowsAllTime] = useState([]);
     const [statsBySeason, setStatsBySeason] = useState({});
+    const [statsByTeamSeason, setTeamStatsBySeason] = useState({});
 
     
 
@@ -66,29 +67,42 @@ const SeasonResults = (props) => {
                     // This will break if more than 12 racers added in a season    
                     const rowsSeasonList = await sheet.getRows({limit: 13});
 
-                    // Initialize array to hold each season's row
+                    // Initialize array to hold each season's individual and team row results 
                     let seasonResults = [];
+                    let seasonResultsTeam = [];
 
                     // Promise.all groups promises together in an iterable array and prevents race conditions
                     await Promise.all(rowsSeasonList.map(async (row) => {
                         // Each row represents a racers results for that season
                         // Save desired stats to an object
-                        let seasonRowResult = {
+                        let seasonIndividualResult = {
                             rank: row.rank,
                             name: row.name,
                             points: row.points,
                             change: row.change
                         }
-                        // add each racer's results to the array 
-                        return seasonResults = [...seasonResults, seasonRowResult]
+
+                        let seasonTeamResult = {
+                            rank: row.teamRank,
+                            name: row.teamName,
+                            points: row.teamPoints,
+                            change: row.teamChange
+                        }
+
+                        // add each racer and team's results to the respective array 
+                        seasonResults = [...seasonResults, seasonIndividualResult]
+                        seasonResultsTeam = [...seasonResultsTeam, seasonTeamResult]
 
                     }))
 
                     // Use Lodash's merge() to deep copy the array of all the racer results objects into the statsBySeason object under their respective season
                     // Assign the row results to the correct season
                     statsBySeason[sheet.title] = merge(seasonResults);
+                    statsByTeamSeason[sheet.title] = merge(seasonResultsTeam);
+
                     // Update state 
                     setStatsBySeason(statsBySeason);
+                    setTeamStatsBySeason(statsByTeamSeason);
                  }
 
                  fetchSeasonRows();
