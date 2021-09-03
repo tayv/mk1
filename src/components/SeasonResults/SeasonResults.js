@@ -4,6 +4,7 @@ import merge from 'lodash/merge';
 
 import PrintSeasonData from './PrintSeasonData';
 import PrintAllTimeData from './PrintAllTimeData';
+import PrintTeamSeasonData from './PrintTeamSeasonData';
 
 const spreadsheetID = process.env.REACT_APP_GOOGLE_SPREADSHEET_ID;
 const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
@@ -153,15 +154,32 @@ const SeasonResults = (props) => {
     return (
         <tbody>
             {
-                // Add season or allTime state data (grabbed from Google Sheet API using PrintSeasonRows() into table rows here
-                (function () {
+                // // Add season or allTime state data (grabbed from Google Sheet API using PrintSeasonRows() into table rows here
+                // (function () {
 
-                    if (props.season !== "allTime") {
-                            return  <PrintSeasonData season={props.season} statsBySeason={statsBySeason} />;
-                    } else {
-                        return <PrintAllTimeData statsAllTime={statsAllTime} />;
-                    }
+                //     if (props.season !== "allTime") {
+                //             return  <PrintSeasonData teamToggle={props.teamToggle} season={props.season} statsBySeason={statsBySeason} />;
+                //     } else {
+                //         return <PrintAllTimeData statsAllTime={statsAllTime} />;
+                //     }
                      
+                // })()
+
+                (function () {
+                    switch (true) {
+                        case props.teamToggle === "individual" && props.season !== "allTime":
+                          return <PrintSeasonData teamToggle={props.teamToggle} season={props.season} statsBySeason={statsBySeason} />;
+                          break;
+                        case props.teamToggle === "individual" && props.season === "allTime":
+                          return <PrintAllTimeData statsAllTime={statsAllTime} />;
+                          break;
+                        case props.teamToggle === "team" && props.season !== "allTime":
+                          return <PrintTeamSeasonData teamToggle={props.teamToggle} season={props.season} statsByTeamSeason={statsByTeamSeason} />;
+                          break;
+                        default:
+                          return null;
+                      }
+
                 })()
             }
         </tbody>

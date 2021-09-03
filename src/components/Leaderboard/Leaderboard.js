@@ -31,17 +31,17 @@ const Leaderboard = () => {
                         {
                             (function () {
                                 if (season === "allTime") {
-                                return (
-                                    <tr>
-                                        <th></th>
-                                        <th>Racer</th>
-                                        <th>Championship</th>
-                                        <th>Gold</th>
-                                        <th>Silver</th>
-                                        <th>Bronze</th>
-                                        <th>Time Trial</th>
-                                    </tr>
-                                ) 
+                                    return (
+                                        <tr>
+                                            <th></th>
+                                            <th>Racer</th>
+                                            <th>Championship</th>
+                                            <th>Gold</th>
+                                            <th>Silver</th>
+                                            <th>Bronze</th>
+                                            <th>Time Trial</th>
+                                        </tr>
+                                    ) 
                                 } else {
                                     return (
                                         <tr>
@@ -55,7 +55,7 @@ const Leaderboard = () => {
                             })()
                         }
                     </thead>
-                    <SeasonResults season={season} />
+                    <SeasonResults teamToggle={teamToggle} season={season} />
                 </table>
             </div>
 
