@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'; 
 import { GoogleSpreadsheet } from 'google-spreadsheet';
-import { pickBy, identity, merge } from 'lodash';
+import { merge } from 'lodash';
 
 import PrintSeasonData from './PrintSeasonData';
 import PrintAllTimeData from './PrintAllTimeData';
@@ -100,13 +100,10 @@ const SeasonResults = (props) => {
 
                     }))
 
-                    // remove undefined values using lodash pickBy()
-                    const cleanedSeasonResultsTeam = pickBy(seasonResultsTeam, undefined)
-                    console.log("cleanded", cleanedSeasonResultsTeam, "unclean", seasonResultsTeam)
                     // Use Lodash's merge() to deep copy the array of all the racer results objects into the statsBySeason object under their respective season
                     // Assign the row results to the correct season
                     statsBySeason[sheet.title] = merge(seasonResults);
-                    statsByTeamSeason[sheet.title] = merge(cleanedSeasonResultsTeam);
+                    statsByTeamSeason[sheet.title] = merge(seasonResultsTeam);
 
                     // Update state 
                     setStatsBySeason(statsBySeason);

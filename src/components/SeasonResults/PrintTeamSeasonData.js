@@ -11,7 +11,7 @@ const PrintTeamSeasonData = (props) => {
             
             statsByTeamSeasonProp.[props.season].map( (row, index) => (
                 <tr key={ index }>
-                    <td>{ row.rank }</td>
+                    <td>{ row.teamRank }</td>
                     <td>{ row.teamName }</td>
                     <td>{ row.teamPoints }</td>
                     <td>{ row.teamChange }</td>
