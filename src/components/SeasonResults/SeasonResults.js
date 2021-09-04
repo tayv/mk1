@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'; 
 import { GoogleSpreadsheet } from 'google-spreadsheet';
-import merge from 'lodash/merge';
+import { pickBy, identity, merge } from 'lodash';
 
 import PrintSeasonData from './PrintSeasonData';
 import PrintAllTimeData from './PrintAllTimeData';
@@ -83,23 +83,30 @@ const SeasonResults = (props) => {
                             change: row.change
                         }
 
-                        let seasonTeamResult = {
-                            rank: row.teamRank,
-                            name: row.teamName,
-                            points: row.teamPoints,
-                            change: row.teamChange
-                        }
+                        // To prevent saving undefined team rows. Due to google sheets layout it will have undefined team rows 
+                        // since there's less teams than individual racers
+                        if (row.teamName === undefined) return;
 
+                        let seasonTeamResult = {
+                            teamRank: row.teamRank,
+                            teamName: row.teamName,
+                            teamPoints: row.teamPoints,
+                            teamChange: row.teamChange
+                        }
+                        
                         // add each racer and team's results to the respective array 
                         seasonResults = [...seasonResults, seasonIndividualResult]
                         seasonResultsTeam = [...seasonResultsTeam, seasonTeamResult]
 
                     }))
 
+                    // remove undefined values using lodash pickBy()
+                    const cleanedSeasonResultsTeam = pickBy(seasonResultsTeam, undefined)
+                    console.log("cleanded", cleanedSeasonResultsTeam, "unclean", seasonResultsTeam)
                     // Use Lodash's merge() to deep copy the array of all the racer results objects into the statsBySeason object under their respective season
                     // Assign the row results to the correct season
                     statsBySeason[sheet.title] = merge(seasonResults);
-                    statsByTeamSeason[sheet.title] = merge(seasonResultsTeam);
+                    statsByTeamSeason[sheet.title] = merge(cleanedSeasonResultsTeam);
 
                     // Update state 
                     setStatsBySeason(statsBySeason);
@@ -119,7 +126,7 @@ const SeasonResults = (props) => {
       
         fetchRowData();
 
-      }, [sheetsAll, statsBySeason]); // updates when sheetsAll state updates
+      }, [sheetsAll, statsBySeason, statsByTeamSeason]); // updates when sheetsAll state updates
 
 
     useEffect(() => {
@@ -171,7 +178,7 @@ const SeasonResults = (props) => {
                           return <PrintSeasonData teamToggle={props.teamToggle} season={props.season} statsBySeason={statsBySeason} />;
                           break;
                         case props.teamToggle === "individual" && props.season === "allTime":
-                          return <PrintAllTimeData statsAllTime={statsAllTime} />;
+                          return <PrintAllTimeData teamToggle={props.teamToggle} statsAllTime={statsAllTime} />;
                           break;
                         case props.teamToggle === "team" && props.season !== "allTime":
                           return <PrintTeamSeasonData teamToggle={props.teamToggle} season={props.season} statsByTeamSeason={statsByTeamSeason} />;
