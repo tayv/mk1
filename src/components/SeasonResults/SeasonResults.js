@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'; 
 import { GoogleSpreadsheet } from 'google-spreadsheet';
-import merge from 'lodash/merge';
+import { merge } from 'lodash';
 
 import PrintSeasonData from './PrintSeasonData';
 import PrintAllTimeData from './PrintAllTimeData';
+import PrintTeamSeasonData from './PrintTeamSeasonData';
 
 const spreadsheetID = process.env.REACT_APP_GOOGLE_SPREADSHEET_ID;
 const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
@@ -17,6 +18,7 @@ const SeasonResults = (props) => {
     const [statsAllTime, setStatsAllTime] = useState([]); // allTime stats by racer used to display alltime results
     const [rowsAllTime, setRowsAllTime] = useState([]);
     const [statsBySeason, setStatsBySeason] = useState({});
+    const [statsByTeamSeason, setTeamStatsBySeason] = useState({});
 
     
 
@@ -66,29 +68,46 @@ const SeasonResults = (props) => {
                     // This will break if more than 12 racers added in a season    
                     const rowsSeasonList = await sheet.getRows({limit: 13});
 
-                    // Initialize array to hold each season's row
+                    // Initialize array to hold each season's individual and team row results 
                     let seasonResults = [];
+                    let seasonResultsTeam = [];
 
                     // Promise.all groups promises together in an iterable array and prevents race conditions
                     await Promise.all(rowsSeasonList.map(async (row) => {
                         // Each row represents a racers results for that season
                         // Save desired stats to an object
-                        let seasonRowResult = {
+                        let seasonIndividualResult = {
                             rank: row.rank,
                             name: row.name,
                             points: row.points,
                             change: row.change
                         }
-                        // add each racer's results to the array 
-                        return seasonResults = [...seasonResults, seasonRowResult]
+
+                        // To prevent saving undefined team rows. Due to google sheets layout it will have undefined team rows 
+                        // since there's less teams than individual racers
+                        if (row.teamName === undefined) return;
+
+                        let seasonTeamResult = {
+                            teamRank: row.teamRank,
+                            teamName: row.teamName,
+                            teamPoints: row.teamPoints,
+                            teamChange: row.teamChange
+                        }
+                        
+                        // add each racer and team's results to the respective array 
+                        seasonResults = [...seasonResults, seasonIndividualResult]
+                        seasonResultsTeam = [...seasonResultsTeam, seasonTeamResult]
 
                     }))
 
                     // Use Lodash's merge() to deep copy the array of all the racer results objects into the statsBySeason object under their respective season
                     // Assign the row results to the correct season
                     statsBySeason[sheet.title] = merge(seasonResults);
+                    statsByTeamSeason[sheet.title] = merge(seasonResultsTeam);
+
                     // Update state 
                     setStatsBySeason(statsBySeason);
+                    setTeamStatsBySeason(statsByTeamSeason);
                  }
 
                  fetchSeasonRows();
@@ -104,7 +123,7 @@ const SeasonResults = (props) => {
       
         fetchRowData();
 
-      }, [sheetsAll, statsBySeason]); // updates when sheetsAll state updates
+      }, [sheetsAll, statsBySeason, statsByTeamSeason]); // updates when sheetsAll state updates
 
 
     useEffect(() => {
@@ -139,15 +158,38 @@ const SeasonResults = (props) => {
     return (
         <tbody>
             {
-                // Add season or allTime state data (grabbed from Google Sheet API using PrintSeasonRows() into table rows here
-                (function () {
+                // // Add season or allTime state data (grabbed from Google Sheet API using PrintSeasonRows() into table rows here
+                // (function () {
 
-                    if (props.season !== "allTime") {
-                            return  <PrintSeasonData season={props.season} statsBySeason={statsBySeason} />;
-                    } else {
-                        return <PrintAllTimeData statsAllTime={statsAllTime} />;
-                    }
+                //     if (props.season !== "allTime") {
+                //             return  <PrintSeasonData teamToggle={props.teamToggle} season={props.season} statsBySeason={statsBySeason} />;
+                //     } else {
+                //         return <PrintAllTimeData statsAllTime={statsAllTime} />;
+                //     }
                      
+                // })()
+
+                (function () {
+                    switch (true) {
+                        case props.teamToggle === "individual" && props.season !== "allTime":
+                          return <PrintSeasonData teamToggle={props.teamToggle} season={props.season} statsBySeason={statsBySeason} />;
+                          break;
+                        case props.teamToggle === "individual" && props.season === "allTime":
+                          return <PrintAllTimeData teamToggle={props.teamToggle} statsAllTime={statsAllTime} />;
+                          break;
+                        case props.teamToggle === "team" && props.season === "season1":
+                        return <tr><td colspan="7" className="no-table-data-message">There were no teams this season</td></tr>
+                        break;
+                        case props.teamToggle === "team" && props.season === "allTime":
+                        return <tr><td colspan="7" className="no-table-data-message">No data yet 😕</td></tr>
+                        break;
+                        case props.teamToggle === "team" && props.season !== "allTime":
+                          return <PrintTeamSeasonData teamToggle={props.teamToggle} season={props.season} statsByTeamSeason={statsByTeamSeason} />;
+                          break;
+                        default:
+                          return null;
+                      }
+
                 })()
             }
         </tbody>
