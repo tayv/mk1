@@ -2,9 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-.btn {
-  @apply py-2 px-4 font-semibold rounded-lg shadow-md;
+.custom-selectbox {
+  @apply bg-blue-500;
 }
-.btn-green {
-  @apply text-white bg-green-500 hover:bg-green-700;
+
+.dev-border {
+  @apply border-4;
+  @apply border-black;
 }
+
+@layer base {
+  th,
+  td {
+    @apply border-2;
+    @apply border-white;
+    @apply p-4;
+    @apply text-2xl;
+    @apply text-center;
+    @apply text-gray-900;
+  }
+
+  th {
+    @apply bg-blue-600;
+  }
+
+  td {
+    @apply bg-blue-400;
+  }
+}
+

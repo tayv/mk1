@@ -1,5 +1,4 @@
 import React, { useState } from 'react'; 
-import './Leaderboard.css';
 
 import SeasonResults from '../SeasonResults/SeasonResults.js';
 import SeasonFilter from '../SeasonFilter/SeasonFilter.js';
@@ -19,14 +18,14 @@ const Leaderboard = () => {
        }
 
     return  (
-        <div className="Leaderboard-container">
-            <div className="Leaderboard-filter">
+        <div className="w-10/12 p-4 overflow-x:auto dev-border">
+            <div className="flex justify-end p-4 dev-border">
               <TeamIndividualToggle value={teamToggle} onChange={onTeamToggleChange} />
               <SeasonFilter value={season} onChange={onSeasonFilterChange}/>
             </div>
             
             <div>
-                <table>
+                <table className="table-auto border-collapse w-full p-4 dev-border">
                     <thead>
                         {
                             (function () {
