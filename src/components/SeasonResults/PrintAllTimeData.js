@@ -8,8 +8,10 @@ const PrintAllTimeData = (props) => {
 
         statsAllTimeProp.map( (row) => (
             <tr key={ row.id }>
-                <td>{ row.avatar }</td>
-                <td>{ row.name }</td>
+                <td className="flex gap-x-4 items-center"> 
+                    <img className="rounded-full w-12 h-12" src={`./avatars/${row.avatar}`} alt="avatar" /> 
+                    { row.name } 
+                </td>
                 <td>{ row.allTime.championships }</td>
                 <td>{ row.allTime.gold }</td>
                 <td>{ row.allTime.silver }</td>

@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.custom-selectbox {
-  @apply bg-blue-500;
-}
-
 .dev-border {
   @apply border-4;
   @apply border-black;

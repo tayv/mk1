@@ -31,8 +31,7 @@ const Leaderboard = () => {
                             (function () {
                                 if (season === "allTime") {
                                     return (
-                                        <tr>
-                                            <th></th>
+                                        <tr>   
                                             <th>Racer</th>
                                             <th>Championship</th>
                                             <th>Gold</th>
@@ -44,8 +43,7 @@ const Leaderboard = () => {
                                 } else {
                                     return (
                                         <tr>
-                                            <th></th>
-                                            <th>Racer</th>
+                                            <th colSpan="2">Racer</th>
                                             <th>Points</th>
                                             <th>Change</th>
                                         </tr>        

@@ -71,6 +71,7 @@ const SeasonResults = (props) => {
                     // Initialize array to hold each season's individual and team row results 
                     let seasonResults = [];
                     let seasonResultsTeam = [];
+                    let seasonTeamResult;
 
                     // Promise.all groups promises together in an iterable array and prevents race conditions
                     await Promise.all(rowsSeasonList.map(async (row) => {
@@ -79,24 +80,27 @@ const SeasonResults = (props) => {
                         let seasonIndividualResult = {
                             rank: row.rank,
                             name: row.name,
+                            avatar: row.avatar,
                             points: row.points,
                             change: row.change
                         }
 
-                        // To prevent saving undefined team rows. Due to google sheets layout it will have undefined team rows 
-                        // since there's less teams than individual racers
-                        if (row.teamName === undefined) return;
+                        // Wrap in condition to prevent saving undefined team rows due to google sheets layout since there's less teams than individual racers
+                        if (row.teamName !== undefined) {
 
-                        let seasonTeamResult = {
-                            teamRank: row.teamRank,
-                            teamName: row.teamName,
-                            teamPoints: row.teamPoints,
-                            teamChange: row.teamChange
-                        }
-                        
-                        // add each racer and team's results to the respective array 
+                             seasonTeamResult = {
+                                teamRank: row.teamRank,
+                                teamName: row.teamName,
+                                teamPoints: row.teamPoints,
+                                teamChange: row.teamChange
+                            }
+
+                            // do this inside conditional so that undefined values aren't added
+                            seasonResultsTeam = [...seasonResultsTeam, seasonTeamResult]
+                        } 
+
+                        // add each racer's results to the respective array 
                         seasonResults = [...seasonResults, seasonIndividualResult]
-                        seasonResultsTeam = [...seasonResultsTeam, seasonTeamResult]
 
                     }))
 
@@ -168,7 +172,7 @@ const SeasonResults = (props) => {
                           return <PrintAllTimeData teamToggle={props.teamToggle} statsAllTime={statsAllTime} />;
                           break;
                         case props.teamToggle === "team" && props.season === "season1":
-                        return <tr><td colspan="7" className="no-table-data-message">No teams this season</td></tr>
+                        return <tr><td colspan="7" className="no-table-data-message">No teams this season 👯‍♀️</td></tr>
                         break;
                         case props.teamToggle === "team" && props.season === "allTime":
                         return <tr><td colspan="7" className="no-table-data-message">No data yet 😕</td></tr>

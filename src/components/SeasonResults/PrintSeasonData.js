@@ -12,7 +12,10 @@ const PrintSeasonData = (props) => {
             statsBySeasonProp.[props.season].map( (row) => (
                 <tr key={ row.rank }>
                     <td>{ row.rank }</td>
-                    <td>{ row.name }</td>
+                    <td className="flex gap-x-4 items-center"> 
+                        <img className="rounded-full w-12 h-12" src={`./avatars/${row.avatar}`} alt="avatar" /> 
+                        { row.name } 
+                    </td>
                     <td>{ row.points }</td>
                     <td>{ row.change }</td>
                 </tr>
