@@ -4,7 +4,6 @@ import './Leaderboard.css';
 import SeasonResults from '../SeasonResults/SeasonResults.js';
 import SeasonFilter from '../SeasonFilter/SeasonFilter.js';
 import TeamIndividualToggle from '../TeamToggle/TeamToggle';
-import MyListbox from '../ListboxTest';
   
 const Leaderboard = () => {
     // Default to latest season so most likely to load relevant results
@@ -24,7 +23,6 @@ const Leaderboard = () => {
             <div className="Leaderboard-filter">
               <TeamIndividualToggle value={teamToggle} onChange={onTeamToggleChange} />
               <SeasonFilter value={season} onChange={onSeasonFilterChange}/>
-              <MyListbox />
             </div>
             
             <div>
