@@ -79,21 +79,25 @@ const SeasonResults = (props) => {
                         let seasonIndividualResult = {
                             rank: row.rank,
                             name: row.name,
+                            avatar: row.avatar,
                             points: row.points,
                             change: row.change
                         }
 
-                        // To prevent saving undefined team rows. Due to google sheets layout it will have undefined team rows 
-                        // since there's less teams than individual racers
-                        if (row.teamName === undefined) return;
+                        // Wrap in condition to prevent saving undefined team rows due to google sheets layout since there's less teams than individual racers
+                        let seasonTeamResult;
 
-                        let seasonTeamResult = {
-                            teamRank: row.teamRank,
-                            teamName: row.teamName,
-                            teamPoints: row.teamPoints,
-                            teamChange: row.teamChange
+                        if (row.teamName !== undefined) {
+
+                             seasonTeamResult = {
+                                teamRank: row.teamRank,
+                                teamName: row.teamName,
+                                teamPoints: row.teamPoints,
+                                teamChange: row.teamChange
+                            }
+    
                         }
-                        
+
                         // add each racer and team's results to the respective array 
                         seasonResults = [...seasonResults, seasonIndividualResult]
                         seasonResultsTeam = [...seasonResultsTeam, seasonTeamResult]
