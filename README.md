@@ -1,6 +1,6 @@
 # Getting Started 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It uses Tailwind CSS along with Headless UI and HeroIcons for styling. See [Setting up Tailwind with CRA](https://tailwindcss.com/docs/guides/create-react-app) and [Tailwind Depencies](https://tailwindui.com/documentation#using-react).
 
 ## Available Scripts
 

@@ -158,16 +158,6 @@ const SeasonResults = (props) => {
     return (
         <tbody>
             {
-                // // Add season or allTime state data (grabbed from Google Sheet API using PrintSeasonRows() into table rows here
-                // (function () {
-
-                //     if (props.season !== "allTime") {
-                //             return  <PrintSeasonData teamToggle={props.teamToggle} season={props.season} statsBySeason={statsBySeason} />;
-                //     } else {
-                //         return <PrintAllTimeData statsAllTime={statsAllTime} />;
-                //     }
-                     
-                // })()
 
                 (function () {
                     switch (true) {
@@ -178,7 +168,7 @@ const SeasonResults = (props) => {
                           return <PrintAllTimeData teamToggle={props.teamToggle} statsAllTime={statsAllTime} />;
                           break;
                         case props.teamToggle === "team" && props.season === "season1":
-                        return <tr><td colspan="7" className="no-table-data-message">There were no teams this season</td></tr>
+                        return <tr><td colspan="7" className="no-table-data-message">No teams this season</td></tr>
                         break;
                         case props.teamToggle === "team" && props.season === "allTime":
                         return <tr><td colspan="7" className="no-table-data-message">No data yet 😕</td></tr>

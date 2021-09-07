@@ -1,14 +1,13 @@
 import React from 'react';
-import './Header.css';
 
 const Header = () => {
     return (
-        <header className="App-header">
-            <div className="App-logo">
-            LOGO
+        <header className="flex flex-col justify-center items-center w-10/12 p-4 dev-border">
+            <div className="h-9">
+                LOGO
             </div>
             <div className="Navigation">
-            Leaderboard    Schedule    Race Results
+             Leaderboard    Schedule    Race Results
             </div>
         </header>
     )
