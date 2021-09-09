@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import SeasonResults from '../SeasonResults/SeasonResults.js';
 import SeasonFilter from '../SeasonFilter/SeasonFilter.js';
 import TypeRadioGroup from '../TypeRadioGroup/TypeRadioGroup';
-import MyListbox from '../SeasonFilter/SeasonFilter.js';
+import FilterListbox from '../SeasonFilter/SeasonFilter.js';
   
 const Leaderboard = () => {
     // Default to latest season so most likely to load relevant results
@@ -22,7 +22,7 @@ const Leaderboard = () => {
         <div className="w-10/12 p-4 overflow-x:auto dev-border">
             <div className="flex items-center justify-between p-4 dev-border">
               <TypeRadioGroup value={teamToggle} onChange={onTeamToggleChange} />
-              <SeasonFilter value={season} onChange={onSeasonFilterChange}/>
+              <FilterListbox value={season} onChange={onSeasonFilterChange} />
             </div>
             
             <div>
