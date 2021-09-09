@@ -166,22 +166,22 @@ const SeasonResults = (props) => {
                 (function () {
                     switch (true) {
                         case props.teamToggle === "individual" && props.season !== "allTime":
-                          return <PrintSeasonData teamToggle={props.teamToggle} season={props.season} statsBySeason={statsBySeason} />;
-                          break;
+                        return <PrintSeasonData teamToggle={props.teamToggle} season={props.season} statsBySeason={statsBySeason} />;
+                       
                         case props.teamToggle === "individual" && props.season === "allTime":
-                          return <PrintAllTimeData teamToggle={props.teamToggle} statsAllTime={statsAllTime} />;
-                          break;
+                        return <PrintAllTimeData teamToggle={props.teamToggle} statsAllTime={statsAllTime} />;
+                       
                         case props.teamToggle === "team" && props.season === "season1":
                         return <tr><td colspan="7" className="no-table-data-message">No teams this season 👯‍♀️</td></tr>
-                        break;
+                        
                         case props.teamToggle === "team" && props.season === "allTime":
                         return <tr><td colspan="7" className="no-table-data-message">No data yet 😕</td></tr>
-                        break;
+                        
                         case props.teamToggle === "team" && props.season !== "allTime":
-                          return <PrintTeamSeasonData teamToggle={props.teamToggle} season={props.season} statsByTeamSeason={statsByTeamSeason} />;
-                          break;
+                        return <PrintTeamSeasonData teamToggle={props.teamToggle} season={props.season} statsByTeamSeason={statsByTeamSeason} />;
+                        
                         default:
-                          return null;
+                        return null;
                       }
 
                 })()
