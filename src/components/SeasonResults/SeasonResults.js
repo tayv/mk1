@@ -172,10 +172,10 @@ const SeasonResults = (props) => {
                         return <PrintAllTimeData teamToggle={props.teamToggle} statsAllTime={statsAllTime} />;
                        
                         case props.teamToggle === "team" && props.season === "season1":
-                        return <tr><td colspan="7" className="no-table-data-message">No teams this season 👯‍♀️</td></tr>
+                        return <tr><td colSpan="7" className="no-table-data-message">No teams this season 👯‍♀️</td></tr>
                         
                         case props.teamToggle === "team" && props.season === "allTime":
-                        return <tr><td colspan="7" className="no-table-data-message">No data yet 😕</td></tr>
+                        return <tr><td colSpan="7" className="no-table-data-message">No data yet 😕</td></tr>
                         
                         case props.teamToggle === "team" && props.season !== "allTime":
                         return <PrintTeamSeasonData teamToggle={props.teamToggle} season={props.season} statsByTeamSeason={statsByTeamSeason} />;
