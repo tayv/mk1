@@ -182,7 +182,7 @@ const SeasonResults = (props) => {
                         
                         default:
                         return null;
-                      }
+                       }
 
                 })()
             }

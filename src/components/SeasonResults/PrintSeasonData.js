@@ -1,4 +1,6 @@
 import React from 'react';
+import StyleChangeCell from '../Helpers/StyleChangeCell';
+
 
 const PrintSeasonData = (props) => {
     
@@ -17,7 +19,9 @@ const PrintSeasonData = (props) => {
                         { row.name } 
                     </td>
                     <td>{ row.points }</td>
-                    <td>{ row.change }</td>
+                    <td className={ StyleChangeCell(row.change) }>
+                        { row.change }
+                    </td>
                 </tr>
             ))
         )
