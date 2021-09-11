@@ -1,4 +1,3 @@
-import React from 'react';
 
 // Used to update the colors in the table change cell
 const StyleChangeCell = (props) => {

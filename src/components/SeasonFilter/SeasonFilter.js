@@ -1,20 +1,6 @@
 import React from 'react'; 
 import { Listbox } from '@headlessui/react';
-import { SelectorIcon, CheckIcon } from '@heroicons/react/solid'
-
-const SeasonFilter = (props) => {
-
-    return (
-        <div> 
-            <label htmlFor="season" style={{visibility: "hidden"}}>Season: </label>
-            <select className="bg-blue-500 rounded p-2 box-content" defaultValue={props.value} onChange={(e) => props.onChange(e.target.value)} name="season" id="season"> 
-                <option value="season1">Season 1</option>
-                <option value="season2">Season 2</option>
-                <option value="allTime">All Time</option>
-            </select> 
-        </div>
-    )
-}
+import { SelectorIcon, CheckIcon } from '@heroicons/react/solid';
 
 const propsValueConverter = (value) => {
     // Listbox dynamically shows the props.value which is saved from Google Sheets using camel case
