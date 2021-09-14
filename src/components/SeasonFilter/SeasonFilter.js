@@ -22,7 +22,7 @@ const propsValueConverter = (value) => {
 const FilterListbox = (props) => {
   
     return (
-    <div className="flex top-16">
+    <div className="flex">
 
         <Listbox value={props.value} onChange={value => props.onChange(value)}>
             <div className="flex-auto curser-pointer font-medium">

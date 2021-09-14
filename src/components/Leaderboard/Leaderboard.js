@@ -18,8 +18,8 @@ const Leaderboard = () => {
        }
 
     return  (
-        <div className="w-10/12 p-4 overflow-x:auto dev-border">
-            <div className="flex items-center justify-between p-4 dev-border">
+        <div className="w-screen md:w-10/12 p-4 overflow-x:auto dev-border">
+            <div className="flex flex-wrap space-y-4 sm:space-y-0 items-center justify-between p-4 dev-border">
               <TypeRadioGroup value={teamToggle} onChange={onTeamToggleChange} />
               <FilterListbox value={season} onChange={onSeasonFilterChange} />
             </div>

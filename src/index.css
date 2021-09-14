@@ -12,8 +12,8 @@
   td {
     @apply border-2;
     @apply border-white;
-    @apply p-4;
-    @apply text-2xl;
+    @apply px-1 py-2;
+    @apply text-xs sm:text-lg md:text-xl;
     @apply text-center;
     @apply text-gray-900;
   }
