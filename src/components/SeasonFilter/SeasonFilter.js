@@ -22,12 +22,12 @@ const propsValueConverter = (value) => {
 const FilterListbox = (props) => {
   
     return (
-    <div className="flex">
+    <div className="flex w-18">
 
         <Listbox value={props.value} onChange={value => props.onChange(value)}>
             <div className="flex-auto curser-pointer font-medium">
 
-            <Listbox.Button className="relative py-2 pl-4 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500">
+            <Listbox.Button className="relative w-36 py-2 pl-4 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500">
                 <span className="block truncate">{ propsValueConverter(props.value) }</span>
                 <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                     <SelectorIcon className="w-5 h-5 text-gray-400" aria-hidden="true"/>
