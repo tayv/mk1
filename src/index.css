@@ -8,10 +8,14 @@
 }
 
 @layer base {
+  body {
+    @apply bg-gray-100;
+  }
+
   th,
   td {
-    @apply border-2;
-    @apply border-white;
+    @apply border-b-2;
+    @apply border-gray-200;
     @apply flex-wrap;
     @apply px-1 py-2;
     @apply text-xs sm:text-lg md:text-xl;
@@ -20,11 +24,11 @@
   }
 
   th {
-    @apply bg-blue-600;
+    @apply bg-purple-600;
   }
 
   td {
-    @apply bg-blue-400;
+    @apply bg-purple-300;
   }
 }
 

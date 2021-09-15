@@ -9,7 +9,7 @@ const StyleChangeCell = (props) => {
 
     if (changeString.match(regexChangeNone)) { 
 
-        changeCellStyle = "bg-gray-300 text-gray-300" 
+        changeCellStyle = "bg-purple-400" 
         return changeCellStyle; 
 
     } else if (changeString.match(regexChangeUp)) {
