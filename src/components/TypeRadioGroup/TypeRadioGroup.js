@@ -6,7 +6,7 @@ export const TypeRadioGroup = (props) => {
     
   
     return (
-      <div className="">
+      <div>
         <RadioGroup value={props.value} onChange={value => props.onChange(value)}>
         <RadioGroup.Label className="sr-only">Stats Type</RadioGroup.Label>
         <div className="flex justify-evenly cursor-pointer">
