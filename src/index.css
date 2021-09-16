@@ -9,7 +9,7 @@
 
 @layer base {
   body {
-    @apply bg-gray-100;
+    @apply bg-gradient-to-r from-green-100 to-purple-200;
   }
 
   th,

@@ -19,12 +19,12 @@ const Leaderboard = () => {
 
     return  (
         <div className="w-screen md:w-10/12">
-            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 items-center sm:justify-between pb-2 sm:pb-3">
+            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 items-center sm:justify-between pt-4 pb-2 sm:pb-3">
               <TypeRadioGroup value={teamToggle} onChange={onTeamToggleChange} />
               <FilterListbox value={season} onChange={onSeasonFilterChange} />
             </div>
             
-            <div className="border-black border-4 rounded-lg overflow-x-scroll">
+            <div className="border-gray-400 border-2 shadow-xl rounded-lg overflow-x-scroll">
                 <table className="table-auto w-full p-4">
                     <thead>
                         {
