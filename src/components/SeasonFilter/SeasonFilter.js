@@ -33,7 +33,7 @@ const FilterListbox = (props) => {
                     <SelectorIcon className="w-5 h-5 text-gray-400" aria-hidden="true"/>
                 </span>
             </Listbox.Button>
-            <Listbox.Options className="py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none ">
+            <Listbox.Options className="absolute w-52 py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none ">
                 
                 <Listbox.Option value={"season1"}>
                     {({ active, selected }) => (

@@ -11,7 +11,7 @@
 
 @layer base {
   body {
-    @apply bg-gradient-to-r from-green-100 to-purple-200;
+    @apply bg-bkg;
   }
 
   th,

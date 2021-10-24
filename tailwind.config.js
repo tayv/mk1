@@ -6,6 +6,9 @@ module.exports = {
       fontFamily: {
         sans: ['Press Start\\ 2P', 'sans-serif'],
       },
+      backgroundImage: {
+        'bkg': "url('./img/item_bkg.png')",
+      }
     },
   },
   variants: {},
