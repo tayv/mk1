@@ -13,7 +13,31 @@ const propsValueConverter = (value) => {
 
         case value === "season2":
         return "Season 2"
-       
+
+        case value === "season3":
+            return "Season 3"
+        
+        case value === "season4":
+            return "Season 4"
+
+        case value === "season5":
+            return "Season 5"
+
+        case value === "season6":
+            return "Season 6"
+
+        case value === "season7":
+            return "Season 7"
+
+        case value === "season8":
+            return "Season 8"
+
+        case value === "season9":
+            return "Season 9"
+
+        case value === "season10":
+            return "Season 10"
+
         default:
         return null;
       }
