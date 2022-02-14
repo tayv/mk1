@@ -59,6 +59,10 @@ const FilterListbox = (props) => {
             </Listbox.Button>
             <Listbox.Options className="absolute w-52 py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none ">
                 
+                { 
+                    // when adding new season also update default state to latest season in Leaderboard.js 
+                } 
+                
                 <Listbox.Option value={"season1"}>
                     {({ active, selected }) => (
                         <span className={ active ? "flex items-center gap-2 py-2 pr-5 pl-3 bg-blue-500 text-white" : "left-0 flex items-center gap-2 py-2 pr-5 pl-3 bg-white"}>
