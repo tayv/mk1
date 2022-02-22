@@ -15,7 +15,7 @@ const PrintTeamSeasonData = (props) => {
                     <td>{ row.teamRank }</td>
                     <td>{ row.teamName }</td>
                     <td>{ row.teamPoints }</td>
-                    <td className={ StyleChangeCell(row.change) }>
+                    <td className={ StyleChangeCell(row.teamChange) }>
                         { row.teamChange }
                     </td>
                 </tr>
