@@ -1,4 +1,5 @@
 import React from 'react';
+import StyleChangeCell from '../Helpers/StyleChangeCell';
 
 const PrintTeamSeasonData = (props) => {
 
@@ -14,7 +15,9 @@ const PrintTeamSeasonData = (props) => {
                     <td>{ row.teamRank }</td>
                     <td>{ row.teamName }</td>
                     <td>{ row.teamPoints }</td>
-                    <td>{ row.teamChange }</td>
+                    <td className={ StyleChangeCell(row.change) }>
+                        { row.teamChange }
+                    </td>
                 </tr>
             ))
 
