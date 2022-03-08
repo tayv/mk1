@@ -12,17 +12,17 @@ export const TypeRadioGroup = (props) => {
         <div className="flex justify-evenly cursor-pointer">
           <RadioGroup.Option value="individual">
             {({ checked }) => (
-              <span className={ checked ? "rounded-l-lg bg-gray-800 px-4 py-3 text-gray-100" : "ring-4 ring-gray-800 ring-inset rounded-l-lg px-4 py-3 cursor-pointer bg-gray-400 opacity-90 text-gray-600"}>
-                Individual
-              </span>
+              <div className={ checked ? "rounded-l-lg bg-gray-800 px-4 py-3 text-gray-100" : "ring-4 ring-gray-800 ring-inset rounded-l-lg px-4 py-3 cursor-pointer bg-gray-400 opacity-90 text-gray-600"}>
+                <span>Individual</span>
+              </div>
             )}
           </RadioGroup.Option>
       
           <RadioGroup.Option value="team">
             {({ checked }) => (
-              <span className={ checked ? "rounded-r-lg bg-gray-800 px-4 py-3 text-gray-100" : "ring-4 ring-gray-800 ring-inset rounded-r-lg px-4 py-3 cursor-pointer bg-gray-400 opacity-90 text-gray-600"}>
-                Team
-              </span>
+              <div className={ checked ? "rounded-r-lg bg-gray-800 px-4 py-3 text-gray-100" : "ring-4 ring-gray-800 ring-inset rounded-r-lg px-4 py-3 cursor-pointer bg-gray-400 opacity-90 text-gray-600"}>
+                <span>Team</span>
+              </div>
             )}
           </RadioGroup.Option>
         </div>
