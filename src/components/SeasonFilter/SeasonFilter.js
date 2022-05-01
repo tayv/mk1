@@ -66,7 +66,7 @@ const FilterListbox = (props) => {
                 <Listbox.Option value={"season1"}>
                     {({ active, selected }) => (
                         <span className={ active ? "flex items-center gap-2 py-2 pr-5 pl-3 bg-blue-500 text-white" : "left-0 flex items-center gap-2 py-2 pr-5 pl-3 bg-white"}>
-                            Season 1 🏁
+                            Season 1
                             {selected && <CheckIcon className="w-5 h-5" aria-hidden="true" />}
                         </span>
                     )}        
@@ -74,7 +74,7 @@ const FilterListbox = (props) => {
                 <Listbox.Option value={"season2"}>
                     {({ active, selected }) => (
                         <span className={ active ? "flex items-center gap-2 py-2 pr-5 pl-3 bg-blue-500 text-white" : "left-0 flex items-center gap-2 py-2 pr-5 pl-3 bg-white"}>
-                            Season 2 🏁
+                            Season 2
                             {selected && <CheckIcon className="w-5 h-5" aria-hidden="true" />}
                         </span>
                     )}       
@@ -82,7 +82,7 @@ const FilterListbox = (props) => {
                 <Listbox.Option value={"season3"}>
                     {({ active, selected }) => (
                         <span className={ active ? "flex items-center gap-2 py-2 pr-5 pl-3 bg-blue-500 text-white" : "left-0 flex items-center gap-2 py-2 pr-5 pl-3 bg-white"}>
-                            Season 3 🏁
+                            Season 3
                             {selected && <CheckIcon className="w-5 h-5" aria-hidden="true" />}
                         </span>
                     )}       
