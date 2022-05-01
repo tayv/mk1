@@ -50,9 +50,10 @@ const SeasonResults = (props) => {
                 async function fetchRacerListRows() {
 
                     // Get all the active rows for this sheet
-                    const rowsAllTime = await sheet.getRows();
+                    // Will break if more than 25 all time racers. Using a limit so we can use Google Sheet sorting formulas 
+                    const rowsAllTime = await sheet.getRows({limit: 25});
 
-                    // save the data to state so we can trigger other useEfects
+                    // save the data to state so we can trigger other useEffects
                     setRowsAllTime(rowsAllTime);   
                 }
 
