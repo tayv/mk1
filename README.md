@@ -16,7 +16,9 @@ See it in action at [https://mk1racing.netlify.app/](https://mk1racing.netlify.a
 - Uses React for the UI and Google Sheets API to host/update data. 
 - There's a known async rendering issue with season results on initial page load. Can be fixed by triggering a re-render using the season dropdown. 
 
-## Examples
+<details>
+  <summary>🏁 <strong>App Examples</strong></summary>
+  <br>  
 
 https://user-images.githubusercontent.com/48400779/174938723-ad73c9c8-f893-4e85-81ac-c16b88e2bc91.mov
   
