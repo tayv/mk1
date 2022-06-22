@@ -20,7 +20,7 @@ See it in action at [https://mk1racing.netlify.app/](https://mk1racing.netlify.a
 
 https://user-images.githubusercontent.com/48400779/174938723-ad73c9c8-f893-4e85-81ac-c16b88e2bc91.mov
 
-<br>
+
 <details>
   <summary>📸<strong>Screenshots</strong></summary>
 <br>  
@@ -35,6 +35,7 @@ https://user-images.githubusercontent.com/48400779/174938723-ad73c9c8-f893-4e85-
 
 <img width="250" alt="MK1 Mobile View" src="https://user-images.githubusercontent.com/48400779/174939203-4db54aaa-62e0-4d3b-acf6-d2991edf1d74.jpeg">
 
+<br>
 </details>
 
 # Getting Started 
