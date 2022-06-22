@@ -9,15 +9,26 @@ See it in action at [https://mk1racing.netlify.app/](https://mk1racing.netlify.a
 - Goal: Follow standard race league leaderboards while also allowing users the ability to quickly see rankings by season as well as all-time results.
 - Logo designed by Steve A.
 - If I ever have time the Avatars will be updated to pixel art.
+- Pixel art background created by me using Figma
 
 ## Code
 
 - Uses React for the UI and Google Sheets API to host/update data. 
 - There's a known async rendering issue with season results on initial page load. Can be fixed by triggering a re-render using the season dropdown. 
 
+## Examples
 
-https://user-images.githubusercontent.com/48400779/139181521-399eb58a-7588-40f9-925b-09eac07bd064.mov
+https://user-images.githubusercontent.com/48400779/174938723-ad73c9c8-f893-4e85-81ac-c16b88e2bc91.mov
+  
+### Desktop
+  
+<img width="400" alt="Desktop - MK1 Final Season Standings" src="https://user-images.githubusercontent.com/48400779/174938863-5b683f06-7dcd-484b-8c20-eed5b8720fe0.png">
 
+<img width="400" alt="Desktop - MK1 All-Time Championship Rank" src="https://user-images.githubusercontent.com/48400779/174938869-84048e83-7582-4cb2-bfa1-c59e094d3497.png">
+
+### Mobile
+
+<img width="250" alt="MK1 Mobile View" src="https://user-images.githubusercontent.com/48400779/174939203-4db54aaa-62e0-4d3b-acf6-d2991edf1d74.jpeg">
 
 
 # Getting Started 
