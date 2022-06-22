@@ -22,7 +22,7 @@ https://user-images.githubusercontent.com/48400779/174938723-ad73c9c8-f893-4e85-
 
 
 <details>
-  <summary>📸<strong>Screenshots</strong></summary>
+  <summary>📸 <strong>More Screenshots</strong></summary>
 <br>  
   
 ### Desktop
