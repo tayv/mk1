@@ -19,6 +19,8 @@ const SeasonResults = (props) => {
     const [rowsAllTime, setRowsAllTime] = useState([]);
     const [statsBySeason, setStatsBySeason] = useState({});
     const [statsByTeamSeason, setTeamStatsBySeason] = useState({});
+    const [isDataLoaded, setIsDataLoaded] = useState(false); // used to prevent rendering leaderboard data too early
+
 
     
 
@@ -31,6 +33,8 @@ const SeasonResults = (props) => {
             const sheetsAll = doc.sheetsByIndex;
             // save to state
             setSheetData(sheetsAll);
+            // set data loaded to true so we can render the leaderboard data
+            setIsDataLoaded(true); 
         }
 
         fetchSheetData();
@@ -55,6 +59,8 @@ const SeasonResults = (props) => {
 
                     // save the data to state so we can trigger other useEffects
                     setRowsAllTime(rowsAllTime);   
+                    // set data loaded to true so we can render the leaderboard data
+                    setIsDataLoaded(true); 
                 }
 
                   fetchRacerListRows()
@@ -113,6 +119,8 @@ const SeasonResults = (props) => {
                     // Update state 
                     setStatsBySeason(statsBySeason);
                     setTeamStatsBySeason(statsByTeamSeason);
+                    // set data loaded to true so we can render the leaderboard data
+                     setIsDataLoaded(true); 
                  }
 
                  fetchSeasonRows();
@@ -163,7 +171,7 @@ const SeasonResults = (props) => {
     return (
         <tbody>
             {
-
+            isDataLoaded ? (
                 (function () {
                     switch (true) {
                         case props.teamToggle === "individual" && props.season !== "allTime":
@@ -184,8 +192,13 @@ const SeasonResults = (props) => {
                         default:
                         return null;
                        }
-
+                        
                 })()
+            ) : (
+                <tr>
+                    <td colSpan="7" className="loading-message">Loading data...</td>
+                </tr>
+                )
             }
         </tbody>
     )
