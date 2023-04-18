@@ -6,7 +6,7 @@ import FilterListbox from '../SeasonFilter/SeasonFilter.js';
   
 const Leaderboard = () => {
     // Default to latest season so most likely to load relevant results
-    const [season, setSeason] = useState("season3");
+    const [season, setSeason] = useState("season4");
     const [teamToggle, setTeamToggle] = useState("individual");
 
     const onTeamToggleChange = (value) => {

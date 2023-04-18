@@ -6,11 +6,10 @@ const PrintTeamSeasonData = (props) => {
     const statsByTeamSeasonProp = props.statsByTeamSeason;
 
     return (
-
-        // Use a ternary since statBySeason state takes a moment to update as PrintSeasonRows() is async to avoid errors accessing undefined child property. 
-        !statsByTeamSeasonProp.[props.season] ? <tr /> : (
+        // Use a ternary since statBySeason state takes a moment to update as PrintSeasonRows() is async to avoid errors accessing undefined child property.
+        !statsByTeamSeasonProp[props.season] ? <tr /> : (
             
-            statsByTeamSeasonProp.[props.season].map( (row, index) => (
+            statsByTeamSeasonProp[props.season].map( (row, index) => (
                 <tr key={ index }>
                     <td>{ row.teamRank }</td>
                     <td>{ row.teamName }</td>
@@ -22,9 +21,7 @@ const PrintTeamSeasonData = (props) => {
             ))
 
         )
-
     )
-
 }
 
 export default PrintTeamSeasonData;
