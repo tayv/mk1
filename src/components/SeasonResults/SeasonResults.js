@@ -19,7 +19,7 @@ const SeasonResults = (props) => {
     const [rowsAllTime, setRowsAllTime] = useState([]);
     const [statsBySeason, setStatsBySeason] = useState({});
     const [statsByTeamSeason, setTeamStatsBySeason] = useState({});
-    const [isDataLoaded, setIsDataLoaded] = useState(false); // used to prevent rendering leaderboard data too early
+    const [isDataLoaded, setIsDataLoaded] = useState(false); // used to prevent rendering empty leaderboard
 
 
     
