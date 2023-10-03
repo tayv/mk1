@@ -60,7 +60,7 @@ const SeasonResults = (props) => {
             const filteredRowsAllTime = rowsAllTime.filter(
               (row) => row.id && row.id.trim() !== ""
             )
-
+            console.log(filteredRowsAllTime)
             // save the data to state so we can trigger other useEffects
             setRowsAllTime(filteredRowsAllTime)
             // set data loaded to true so we can render the leaderboard data
