@@ -1,4 +1,5 @@
 # Overview
+
 The goal of this project was to learn React by creating a visual leaderboard for tracking Mario Kart race results. MK1 is a race league started during the Covid-19 pandemic.
 
 See it in action at [https://mk1racing.netlify.app/](https://mk1racing.netlify.app/).
@@ -13,13 +14,12 @@ See it in action at [https://mk1racing.netlify.app/](https://mk1racing.netlify.a
 
 ## Code
 
-- Uses React for the UI and Google Sheets API to host/update data. 
-- There's a known async rendering issue with season results on initial page load. Can be fixed by triggering a re-render using the season dropdown. 
+- Uses React for the UI and Google Sheets API to host/update data.
+- There's a known async rendering issue with season results on initial page load. Can be fixed by triggering a re-render using the season dropdown.
 
 ## Examples
 
 https://user-images.githubusercontent.com/48400779/174938723-ad73c9c8-f893-4e85-81ac-c16b88e2bc91.mov
-
 
 <details>
   <summary>📸 <strong>More Screenshots</strong></summary>
@@ -38,7 +38,7 @@ https://user-images.githubusercontent.com/48400779/174938723-ad73c9c8-f893-4e85-
 <br>
 </details>
 
-# Getting Started 
+# Getting Started
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It uses Tailwind CSS along with Headless UI and HeroIcons for styling. See [Setting up Tailwind with CRA](https://tailwindcss.com/docs/guides/create-react-app) and [Tailwind Depencies](https://tailwindui.com/documentation#using-react). The data is stored in a Google Sheet which updates the UI via API calls using npm Google Sheet API wrapper package [google-spreadsheet](https://theoephraim.github.io/node-google-spreadsheet/#/).
 
@@ -81,14 +81,13 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## Things to be aware of
 
-1. If you have more than 12 racers in a season then you should update the limit number in the printSeasonRows()   
+1. If you have more than 12 racers in a season then you should update the limit number in the printSeasonRows()
 
 ```
 const rowsSeasonList = await sheet.getRows({limit: 13});
 ```
 
 This will be made dynamic in the future but for now it's hardcoded in to prevent grabbing additional blank rows in the seasonX sheets. Typically the maximum number of racers in a season is 12 since Mario Kart only supports 12 racers and we currently don't track stats for subs.
-
 
 2. Each season should be its own sheet (copy previous season to use as template) and should follow the `seasonX` naming convention. The SeasonResults.js component makes use of regex in its logic that depends on this. The latest season also typically has the most current formula logic as bug fixes have not always been completely applied to previous season sheets.
 
@@ -104,8 +103,26 @@ To dos:
 
 - Avatars, trophy emoji, and logo should use pixel art styling
 - Team list: Need team specific avatar + text alignment needs fixing
-- Add admin area to submit race results 
+- Add admin area to submit race results
 - Add a checkered flag or Lakitu to signify finished seasons
-- Auto calculate racer's position change after each race weekend 
+- Auto calculate racer's position change after each race weekend
 
+## How to add a new season
 
+- In `SeasonFilter.js`:
+  - Duplicate Listbox.Option and update value to match the season’s Google Sheet name
+
+```
+<Listbox.Option value={"season4"}>
+  {({ active, selected }) => (
+    <span className={ active ? "flex items-center gap-2 py-2 pr-5 pl-3 bg-blue-500 text-white" : "left-0 flex items-center gap-2 py-2 pr-5 pl-3 bg-white"}>
+     Season 4
+    {selected && <CheckIcon className="w-5 h-5" aria-hidden="true" />}
+   </span>
+  )}
+</Listbox.Option>
+```
+
+How to update the season shown on initial load
+
+- ` Leaderboard.js``:  ` const [season, setSeason] = useState("season5”);`
