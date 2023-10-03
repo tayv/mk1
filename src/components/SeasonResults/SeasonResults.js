@@ -68,7 +68,7 @@ const SeasonResults = (props) => {
           async function fetchSeasonRows() {
             // TODO: limit should be updated to be dynamic based on number of racers in allTime sheet.
             // This will break if more than 12 racers added in a season
-            const rowsSeasonList = await sheet.getRows({ limit: 15 })
+            const rowsSeasonList = await sheet.getRows({ limit: 16 })
 
             // Initialize array to hold each season's individual and team row results
             let seasonResults = []
