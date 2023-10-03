@@ -107,7 +107,9 @@ To dos:
 - Add a checkered flag or Lakitu to signify finished seasons
 - Auto calculate racer's position change after each race weekend
 
-## How to add a new season
+## How tos
+
+### How to add a new season
 
 - In `SeasonFilter.js`:
   - Duplicate Listbox.Option and update value to match the season’s Google Sheet name
@@ -123,6 +125,11 @@ To dos:
 </Listbox.Option>
 ```
 
-How to update the season shown on initial load
+### How to update the season shown on initial load
 
 - ` Leaderboard.js``:  ` const [season, setSeason] = useState("season5”);`
+
+### How to update Google sheets for new season
+
+- Add new season/cell to each racers gold/silver/bronze/TT overall calculation On AllTime page
+- Make sure any new racers get their own avatar and their all time leaderboard is tied to their respective cell on the current season sheet

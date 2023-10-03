@@ -56,8 +56,13 @@ const SeasonResults = (props) => {
             // Will break if more than 25 all time racers. Using a limit so we can use Google Sheet sorting formulas
             const rowsAllTime = await sheet.getRows({ limit: 25 })
 
+            // Filter out rows with blank or undefined id values
+            const filteredRowsAllTime = rowsAllTime.filter(
+              (row) => row.id && row.id.trim() !== ""
+            )
+
             // save the data to state so we can trigger other useEffects
-            setRowsAllTime(rowsAllTime)
+            setRowsAllTime(filteredRowsAllTime)
             // set data loaded to true so we can render the leaderboard data
           }
           if (dataFetched) {
