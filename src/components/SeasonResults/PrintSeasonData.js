@@ -3,7 +3,7 @@ import StyleChangeCell from "../Helpers/StyleChangeCell"
 
 const PrintSeasonData = (props) => {
   const statsBySeasonProp = props.statsBySeason
-  console.log(props.statsBySeason)
+
   return (
     // Use a ternary since statBySeason state takes a moment to update as PrintSeasonRows() is async to avoid errors accessing undefined child property.
     !statsBySeasonProp[props.season] ? (

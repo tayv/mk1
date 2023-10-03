@@ -54,13 +54,13 @@ const SeasonResults = (props) => {
           async function fetchRacerListRows() {
             // Get all the active rows for this sheet
             // Will break if more than 25 all time racers. Using a limit so we can use Google Sheet sorting formulas
-            const rowsAllTime = await sheet.getRows({ limit: 25 })
+            const rowsAllTime = await sheet.getRows({ limit: 24 })
 
             // Filter out rows with blank or undefined id values
             const filteredRowsAllTime = rowsAllTime.filter(
               (row) => row.id && row.id.trim() !== ""
             )
-            console.log(filteredRowsAllTime)
+
             // save the data to state so we can trigger other useEffects
             setRowsAllTime(filteredRowsAllTime)
             // set data loaded to true so we can render the leaderboard data
@@ -72,8 +72,8 @@ const SeasonResults = (props) => {
           // If we're on a sheet starting with "season" then get each row and deep copy it into the statsBySeason object
           async function fetchSeasonRows() {
             // TODO: limit should be updated to be dynamic based on number of racers in allTime sheet.
-            // This will break if more than 12 racers added in a season
-            const rowsSeasonList = await sheet.getRows({ limit: 16 })
+            // This will break if more than 14 racers added in a season (note array count starts at 0 so limit = total racers + 1)
+            const rowsSeasonList = await sheet.getRows({ limit: 15 })
 
             // Initialize array to hold each season's individual and team row results
             let seasonResults = []
@@ -120,7 +120,7 @@ const SeasonResults = (props) => {
             setStatsBySeason(statsBySeason)
             setTeamStatsBySeason(statsByTeamSeason)
             // set data loaded to true so we can render the leaderboard data
-            //  setIsDataLoaded(true)
+            setIsDataLoaded(true)
           }
 
           fetchSeasonRows()

@@ -46,6 +46,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `nvm use`
+
+Switches to the correct node version as specified in `.nvmrc`
+
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -81,23 +85,59 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## Things to be aware of
 
-1. If you have more than 12 racers in a season then you should update the limit number in the printSeasonRows()
+### If you add racers
 
-```
-const rowsSeasonList = await sheet.getRows({limit: 13});
-```
+If you add racers to a season or all time list then you should update the row limit number in `SeasonResults.js`. Remember Array count starts at 0 so limit should be total rows + 1:
 
-This will be made dynamic in the future but for now it's hardcoded in to prevent grabbing additional blank rows in the seasonX sheets. Typically the maximum number of racers in a season is 12 since Mario Kart only supports 12 racers and we currently don't track stats for subs.
+- `const rowsSeasonList = await sheet.getRows({ limit: 15 })`
 
-2. Each season should be its own sheet (copy previous season to use as template) and should follow the `seasonX` naming convention. The SeasonResults.js component makes use of regex in its logic that depends on this. The latest season also typically has the most current formula logic as bug fixes have not always been completely applied to previous season sheets.
+- `const rowsAllTime = await sheet.getRows({ limit: 24 })`
 
-3. Read the comments on the Google Sheet before entering data so you enter data into the correct cells. At first glance there appears to be duplicate fields but this is only because some duplication is necessary to make use of sorting formulas.
+This will be made dynamic in the future but for now it's hardcoded in to prevent grabbing additional blank rows in the seasonX sheets.
 
-4. For any API changes refer to [google-spreadsheet documentation](https://theoephraim.github.io/node-google-spreadsheet/#/)
+### How to add a new season
 
-5. Pixel art was created by me. The current avatars are screenshots from the Mario Kart 8 Deluxe but those will eventually (hopefully) get replaced by custom pixel art as I have time.
+1. Duplicate the prev season in Google Sheets
 
-6. This is a work in progress and there are several outstanding items. I may or may not get to these depending on whether I have other projects I'm more interested in.
+Each season should be its own sheet (copy previous season to use as template) and should follow the `seasonX` naming convention. The `SeasonResults.js` makes use of regex in its logic that depends on this. The latest season also typically has the most current formula logic as bug fixes have not always been completely applied to previous season sheets.
+
+2. Read the comments on the Google Sheet before entering data so you enter data into the correct cells. At first glance there appears to be duplicate fields but this is only because some duplication is necessary to make use of sorting formulas.
+
+3. Add new season to the season dropdown
+
+- In `SeasonFilter.js`:
+
+  Duplicate Listbox.Option and update value to match the season’s Google Sheet name
+
+  ```
+  <Listbox.Option value={"season4"}>
+    {({ active, selected }) => (
+      <span className={ active ? "flex items-center gap-2 py-2 pr-5 pl-3 bg-blue-500 text-white" : "left-0 flex items-center gap-2 py-2 pr-5 pl-3 bg-white"}>
+      Season 4
+      {selected && <CheckIcon className="w-5 h-5" aria-hidden="true" />}
+    </span>
+    )}
+  </Listbox.Option>
+  ```
+
+4. Update the default season (shown on initial load)
+
+e.g. ` Leaderboard.js``:  ` const [season, setSeason] = useState("season5”);`
+
+5. Update Google sheets logic for new season
+
+- Add new season/cell to each racers gold/silver/bronze/TT overall calculation On AllTime page
+- Make sure any new racers get their own avatar and their all time leaderboard is tied to their respective cell on the current season sheet
+
+### Google Sheets API
+
+For any API changes refer to [google-spreadsheet documentation](https://theoephraim.github.io/node-google-spreadsheet/#/)
+
+## Other notes
+
+- Pixel art was created by me. The current avatars are screenshots from the Mario Kart 8 Deluxe but those will eventually (hopefully) get replaced by custom pixel art as I have time.
+
+- This is a work in progress and there are several outstanding items. I may or may not get to these depending on whether I have other projects I'm more interested in.
 
 To dos:
 
@@ -106,30 +146,4 @@ To dos:
 - Add admin area to submit race results
 - Add a checkered flag or Lakitu to signify finished seasons
 - Auto calculate racer's position change after each race weekend
-
-## How tos
-
-### How to add a new season
-
-- In `SeasonFilter.js`:
-  - Duplicate Listbox.Option and update value to match the season’s Google Sheet name
-
-```
-<Listbox.Option value={"season4"}>
-  {({ active, selected }) => (
-    <span className={ active ? "flex items-center gap-2 py-2 pr-5 pl-3 bg-blue-500 text-white" : "left-0 flex items-center gap-2 py-2 pr-5 pl-3 bg-white"}>
-     Season 4
-    {selected && <CheckIcon className="w-5 h-5" aria-hidden="true" />}
-   </span>
-  )}
-</Listbox.Option>
-```
-
-### How to update the season shown on initial load
-
-- ` Leaderboard.js``:  ` const [season, setSeason] = useState("season5”);`
-
-### How to update Google sheets for new season
-
-- Add new season/cell to each racers gold/silver/bronze/TT overall calculation On AllTime page
-- Make sure any new racers get their own avatar and their all time leaderboard is tied to their respective cell on the current season sheet
+- Async fetching logic needs a refactor to prevent unnecessary async logic inside nested functions. Also have a bug where season data sometimes fails to display on initial render.
