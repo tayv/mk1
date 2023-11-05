@@ -12,9 +12,8 @@ const PrintSeasonData = (props) => {
   // Dynamic styles
   const highlightColStyle = "bg-purple-400 transition ease-in-out delay-10 p-0"
   const secondaryColStyle = "text-purple-500 text-opacity-60 p-0"
-  console.log(currentSeasonName === "season1")
+
   // Various standing views
-  const emptyStandings = <tr />
   const renderStandings = (currentSeasonName) => {
     // The original seasons didn't have byes so they're rendered with different columns
     if (
