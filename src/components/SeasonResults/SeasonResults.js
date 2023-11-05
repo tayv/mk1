@@ -27,6 +27,8 @@ const SeasonResults = (props) => {
             teamToggle={props.teamToggle}
             season={props.season}
             statsBySeason={statsBySeason}
+            sortByProjPoint={props.sortByProjPoint}
+            handleSortProjPointToggle={props.handleSortProjPointToggle}
           />
         )
 
@@ -62,6 +64,8 @@ const SeasonResults = (props) => {
             teamToggle={props.teamToggle}
             season={props.season}
             statsByTeamSeason={statsByTeamSeason}
+            sortByProjPoint={props.sortByProjPoint}
+            handleSortProjPointToggle={props.handleSortProjPointToggle}
           />
         )
 
@@ -82,7 +86,7 @@ const SeasonResults = (props) => {
         renderContent()
       ) : (
         <tr>
-          <td colSpan="7" className="loading-message">
+          <td colSpan="7" className="loading-message animate-pulse">
             Loading data...
           </td>
         </tr>

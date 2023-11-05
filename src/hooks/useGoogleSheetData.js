@@ -20,12 +20,21 @@ const fetchSeasonRows = async (sheet) => {
 
   await Promise.all(
     rowsSeasonList.map(async (row) => {
+      console.log("ROW:", row)
       seasonResults.push({
         rank: row.rank,
         name: row.name,
         avatar: row.avatar,
         points: row.points,
         change: row.change,
+        bye: row.bye,
+        projected: row.projected,
+
+        projName: row.projName,
+        projAvatar: row.projAvatar,
+        projCurrentPoints: row.projCurrentPoints,
+        projBye: row.projBye,
+        projProjected: row.projProjected,
       })
 
       if (row.teamName !== undefined) {
@@ -33,6 +42,8 @@ const fetchSeasonRows = async (sheet) => {
           teamRank: row.teamRank,
           teamName: row.teamName,
           teamPoints: row.teamPoints,
+          teamBye: row.teamBye,
+          teamProjected: row.teamProjected,
           teamChange: row.teamChange,
         })
       }
