@@ -3,7 +3,7 @@ import StyleChangeCell from "../Helpers/StyleChangeCell"
 import HighlightCol from "../Helpers/HighlightCol"
 
 const PrintSeasonData = (props) => {
-  const currentSeasonName = [props.season]
+  const currentSeasonName = props.season
   const statsAllSeasons = props.statsBySeason
   const currentSeasonData = statsAllSeasons[currentSeasonName]
   const sortByProjPoint = props.sortByProjPoint
@@ -12,7 +12,7 @@ const PrintSeasonData = (props) => {
   // Dynamic styles
   const highlightColStyle = "bg-purple-400 transition ease-in-out delay-10 p-0"
   const secondaryColStyle = "text-purple-500 text-opacity-60 p-0"
-
+  console.log(currentSeasonName === "season1")
   // Various standing views
   const emptyStandings = <tr />
   const renderStandings = (currentSeasonName) => {
@@ -37,9 +37,7 @@ const PrintSeasonData = (props) => {
             </div>
           </td>
           <td>{row.points}</td>
-          {row.change && (
-            <td className={StyleChangeCell(row.change)}>{row.change}</td>
-          )}
+          <td className={StyleChangeCell(row.change)}>{row.change}</td>
         </tr>
       ))
     }
@@ -94,9 +92,7 @@ const PrintSeasonData = (props) => {
   return (
     // Check that statBySeason isn't undefined as it depends on PrintSeasonRows()
 
-    <>
-      {!currentSeasonData ? emptyStandings : renderStandings(currentSeasonName)}
-    </>
+    <>{currentSeasonData && renderStandings(currentSeasonName)}</>
   )
 }
 

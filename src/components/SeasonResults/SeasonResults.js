@@ -14,9 +14,10 @@ const SeasonResults = (props) => {
     statsAllTime,
     statsBySeason,
     statsByTeamSeason,
-    isDataLoaded,
+    isCurrentSeasonLoaded,
+    // isAllDataLoaded,
     // error,
-  } = useGoogleSheetData()
+  } = useGoogleSheetData(props.season) // Need to pass season prop as this sets which sheet to fetch first
 
   // Rendering logic based on season and row data
   const renderContent = () => {
@@ -82,7 +83,7 @@ const SeasonResults = (props) => {
 
   return (
     <tbody>
-      {isDataLoaded ? (
+      {isCurrentSeasonLoaded ? (
         renderContent()
       ) : (
         <tr>

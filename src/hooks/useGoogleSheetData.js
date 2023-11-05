@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { GoogleSpreadsheet } from "google-spreadsheet"
 import { merge } from "lodash"
 
@@ -20,7 +20,6 @@ const fetchSeasonRows = async (sheet) => {
 
   await Promise.all(
     rowsSeasonList.map(async (row) => {
-      console.log("ROW:", row)
       seasonResults.push({
         rank: row.rank,
         name: row.name,
@@ -56,49 +55,94 @@ const fetchSeasonRows = async (sheet) => {
   }
 }
 
-export const useGoogleSheetData = () => {
+export const useGoogleSheetData = (season) => {
   const [sheetsAll, setSheetData] = useState([])
   const [statsAllTime, setStatsAllTime] = useState([])
   const [rowsAllTime, setRowsAllTime] = useState([])
   const [statsBySeason, setStatsBySeason] = useState({})
   const [statsByTeamSeason, setTeamStatsBySeason] = useState({})
-  const [isDataLoaded, setIsDataLoaded] = useState(false)
+  const [isAllDataLoaded, setIsDataLoaded] = useState(false)
   const [error, setError] = useState(null)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await doc.loadInfo()
-        const sheetsAll = doc.sheetsByIndex
-        setSheetData(sheetsAll)
+  const [isCurrentSeasonLoaded, setCurrentSeasonLoaded] = useState(false) // Used to track when current season is fetched for better loading performance
 
-        for (const sheet of sheetsAll) {
-          if (sheet.title === "allTime") {
-            const allTimeRows = await fetchRacerListRows(sheet)
-            setRowsAllTime(allTimeRows)
-          } else if (/season/gm.test(sheet.title)) {
-            const { seasonResults, seasonResultsTeam } = await fetchSeasonRows(
-              sheet
-            )
-            setStatsBySeason((prev) => ({
-              ...prev,
-              [sheet.title]: seasonResults,
-            }))
-            setTeamStatsBySeason((prev) => ({
-              ...prev,
-              [sheet.title]: seasonResultsTeam,
-            }))
-          }
+  const docInfoLoaded = useRef(false) // Ref to track if the doc info has been loaded
+
+  useEffect(() => {
+    const fetchSpecificSeasonData = async () => {
+      try {
+        if (!docInfoLoaded.current) {
+          await doc.loadInfo()
+          docInfoLoaded.current = true // update ref so we don't make unnecessary calls in later useEffects
         }
-        setIsDataLoaded(true)
+        const sheetName = doc.sheetsByTitle[season]
+
+        if (sheetName.title === "allTime") {
+          const allTimeRows = await fetchRacerListRows(sheetName)
+          setRowsAllTime(allTimeRows)
+        } else if (/season/gm.test(sheetName.title)) {
+          const { seasonResults, seasonResultsTeam } = await fetchSeasonRows(
+            sheetName
+          )
+          setStatsBySeason((prev) => ({
+            ...prev,
+            [sheetName.title]: seasonResults,
+          }))
+          setTeamStatsBySeason((prev) => ({
+            ...prev,
+            [sheetName.title]: seasonResultsTeam,
+          }))
+        }
+
+        setCurrentSeasonLoaded(true)
       } catch (err) {
         console.error("Error fetching data:", err)
         setError(err.message)
       }
     }
 
-    fetchData()
-  }, [])
+    fetchSpecificSeasonData()
+  }, [season])
+
+  // To fetch all season data. Want to do this after initial season is loaded.
+  useEffect(() => {
+    if (isCurrentSeasonLoaded) {
+      const fetchAllSeasonData = async () => {
+        try {
+          if (!docInfoLoaded.current) {
+            await doc.loadInfo()
+            docInfoLoaded.current = true // update ref so we don't make unnecessary calls in later useEffects
+          }
+          const sheetsAll = doc.sheetsByIndex
+          setSheetData(sheetsAll)
+
+          for (const sheet of sheetsAll) {
+            if (sheet.title === "allTime") {
+              const allTimeRows = await fetchRacerListRows(sheet)
+              setRowsAllTime(allTimeRows)
+            } else if (/season/gm.test(sheet.title)) {
+              const { seasonResults, seasonResultsTeam } =
+                await fetchSeasonRows(sheet)
+              setStatsBySeason((prev) => ({
+                ...prev,
+                [sheet.title]: seasonResults,
+              }))
+              setTeamStatsBySeason((prev) => ({
+                ...prev,
+                [sheet.title]: seasonResultsTeam,
+              }))
+            }
+          }
+          setIsDataLoaded(true)
+        } catch (err) {
+          console.error("Error fetching data:", err)
+          setError(err.message)
+        }
+      }
+
+      fetchAllSeasonData()
+    }
+  }, [isCurrentSeasonLoaded])
 
   useEffect(() => {
     const allTimeList = rowsAllTime.map((row) => ({
@@ -124,7 +168,8 @@ export const useGoogleSheetData = () => {
     rowsAllTime,
     statsBySeason,
     statsByTeamSeason,
-    isDataLoaded,
+    isAllDataLoaded,
+    isCurrentSeasonLoaded,
     error,
   }
 }
