@@ -41,9 +41,15 @@ const fetchSeasonRows = async (sheet) => {
           teamRank: row.teamRank,
           teamName: row.teamName,
           teamPoints: row.teamPoints,
-          teamBye: row.teamBye,
           teamProjected: row.teamProjected,
+          teamBye: row.teamBye,
           teamChange: row.teamChange,
+
+          projTeamRank: row.projTeamRank,
+          projTeamName: row.projTeamName,
+          projTeamPoints: row.projTeamPoints,
+          projTeamProjected: row.projTeamProjected,
+          projTeamBye: row.projTeamBye,
         })
       }
     })

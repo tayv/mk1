@@ -26,8 +26,11 @@ const PrintTeamSeasonData = (props) => {
     <>
       {validRows.map((row, index) => (
         <tr key={index}>
-          <td>{row.teamRank}</td>
-          <td className="gap-x-2 sm:gap-x-4 pl-2 text-left">{row.teamName}</td>
+          <td> {sortByProjPoint ? row.projTeamRank : row.teamRank}</td>
+          <td className="gap-x-2 sm:gap-x-4 pl-2 text-left">
+            {" "}
+            {sortByProjPoint ? row.projTeamName : row.teamName}
+          </td>
 
           <td
             className={sortByProjPoint ? secondaryColStyle : highlightColStyle}
@@ -37,7 +40,7 @@ const PrintTeamSeasonData = (props) => {
               sortByProjPoint={sortByProjPoint}
               handleSortProjPointToggle={handleSortProjPointToggle}
             >
-              {row.teamPoints}
+              {sortByProjPoint ? row.projTeamPoints : row.teamPoints}
             </HighlightCol>
           </td>
           {/* <td className={StyleChangeCell(row.teamChange)}>{row.teamChange}</td> */}
@@ -50,10 +53,12 @@ const PrintTeamSeasonData = (props) => {
               sortByProjPoint={sortByProjPoint}
               handleSortProjPointToggle={handleSortProjPointToggle}
             >
-              {row.teamProjected}
+              {sortByProjPoint ? row.projTeamProjected : row.teamProjected}
             </HighlightCol>
           </td>
-          <td className="text-purple-500 ">{row.teamBye}</td>
+          <td className="text-purple-500 ">
+            {sortByProjPoint ? row.projTeamBye : row.teamBye}
+          </td>
         </tr>
       ))}
     </>

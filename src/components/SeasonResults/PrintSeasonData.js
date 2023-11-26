@@ -66,7 +66,7 @@ const PrintSeasonData = (props) => {
               sortByProjPoint={sortByProjPoint}
               handleSortProjPointToggle={handleSortProjPointToggle}
             >
-              {row.points}
+              {sortByProjPoint ? row.projCurrentPoints : row.points}
             </HighlightCol>
           </td>
 
