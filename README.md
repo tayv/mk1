@@ -128,6 +128,7 @@ e.g. ` Leaderboard.js``:  ` const [season, setSeason] = useState("season5”);`
 
 - Add new season/cell to each racers gold/silver/bronze/TT overall calculation On AllTime page
 - Make sure any new racers get their own avatar and their all time leaderboard is tied to their respective cell on the current season sheet
+- Update the AllTime sheet to track each racer's gold/silver/bronze/TT count
 
 ### Google Sheets API
 
