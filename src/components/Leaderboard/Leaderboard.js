@@ -7,7 +7,7 @@ import HighlightCol from "../Helpers/HighlightCol.js"
 
 const Leaderboard = () => {
   // Default to latest season so most likely to load relevant results
-  const [season, setSeason] = useState("season5")
+  const [season, setSeason] = useState("season6")
   const [teamToggle, setTeamToggle] = useState("individual")
   const [sortByProjPoint, setSortByProjPoints] = React.useState(false) // Used by PrintSeasonData
 

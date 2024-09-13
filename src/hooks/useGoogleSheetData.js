@@ -5,8 +5,8 @@ import { merge } from "lodash"
 const spreadsheetID = process.env.REACT_APP_GOOGLE_SPREADSHEET_ID
 const apiKey = process.env.REACT_APP_GOOGLE_API_KEY
 
-const doc = new GoogleSpreadsheet(spreadsheetID)
-doc.useApiKey(apiKey)
+const doc = new GoogleSpreadsheet(spreadsheetID, { apiKey: apiKey })
+//doc.auth(apiKey) // eslint-disable-line
 
 const fetchRacerListRows = async (sheet) => {
   const rowsAllTime = await sheet.getRows({ limit: 24 }) // returns 25 racers because array starts at 0
