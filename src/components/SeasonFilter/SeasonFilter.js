@@ -144,6 +144,22 @@ const FilterListbox = (props) => {
                 </span>
               )}
             </Listbox.Option>
+            <Listbox.Option value={"season6"}>
+              {({ active, selected }) => (
+                <span
+                  className={
+                    active
+                      ? "flex items-center gap-2 py-2 pr-5 pl-3 bg-blue-500 text-white"
+                      : "left-0 flex items-center gap-2 py-2 pr-5 pl-3 bg-white"
+                  }
+                >
+                  Season 6
+                  {selected && (
+                    <CheckIcon className="w-5 h-5" aria-hidden="true" />
+                  )}
+                </span>
+              )}
+            </Listbox.Option>
             <Listbox.Option value={"allTime"}>
               {({ active, selected }) => (
                 <span
